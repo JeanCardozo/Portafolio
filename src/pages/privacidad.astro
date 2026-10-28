@@ -1,0 +1,50 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { legal } from '../data/site';
+---
+<Legal title="Política de tratamiento de datos personales" description="Cómo trata Jean Cardozo (JeanCRG) tus datos personales: finalidades, derechos y cómo ejercerlos, conforme a la Ley 1581 de 2012.">
+  <h2>1. Responsable del tratamiento</h2>
+  <p>{legal.responsable}, que opera bajo el nombre comercial {legal.trade}. Domicilio: {legal.domicilio}. Correo: <a href={`mailto:${legal.email}`}>{legal.email}</a>. Teléfono y WhatsApp: {legal.phone}. Esta persona atiende las consultas y reclamos sobre datos personales.</p>
+
+  <h2>2. Qué datos tratamos y cómo los recibimos</h2>
+  <p>Este sitio no tiene formularios, cuentas de usuario ni analítica. No recolectamos datos mientras lo navegas. Recibimos datos solo cuando decides escribirme por WhatsApp, correo o teléfono, o cuando contratas un servicio:</p>
+  <ul>
+    <li>Nombre, número de teléfono, correo y nombre de tu negocio.</li>
+    <li>El contenido de tus mensajes y la información del proyecto que me compartes (textos, logos, fotos, accesos acordados).</li>
+    <li>Datos de facturación y pago, si contratas.</li>
+  </ul>
+  <p>No pedimos datos sensibles ni de niños, niñas y adolescentes. Si por error los recibimos, los eliminamos.</p>
+
+  <h2>3. Finalidades</h2>
+  <ul>
+    <li>Responder tu consulta y preparar una cotización o propuesta.</li>
+    <li>Ejecutar, entregar y dar soporte al servicio contratado.</li>
+    <li>Facturar, cobrar y cumplir obligaciones contables y tributarias.</li>
+    <li>Con tu autorización expresa, enviarte información sobre servicios relacionados. Puedes pedir que pare en cualquier momento y lo haré sin costo.</li>
+  </ul>
+
+  <h2>4. Autorización</h2>
+  <p>Al escribirme y compartir tus datos para estas finalidades, autorizas su tratamiento. Conservo prueba de esa autorización (el propio mensaje o el contrato). Para fines comerciales distintos a tu solicitud pediré una autorización aparte.</p>
+
+  <h2>5. Con quién se comparten</h2>
+  <p>No vendo ni cedo tus datos. Pueden pasar por proveedores que hacen posible el servicio, que actúan por mi cuenta: WhatsApp (Meta) para la mensajería, el proveedor de alojamiento del sitio (Netlify) y herramientas de correo y facturación. Algunos están fuera de Colombia, por lo que puede haber transmisión internacional de datos bajo las condiciones del artículo 25 del Decreto 1377 de 2013.</p>
+
+  <h2>6. Tus derechos</h2>
+  <ul>
+    <li>Conocer, actualizar y rectificar tus datos.</li>
+    <li>Solicitar prueba de la autorización otorgada.</li>
+    <li>Ser informado del uso que se ha dado a tus datos.</li>
+    <li>Presentar quejas ante la Superintendencia de Industria y Comercio.</li>
+    <li>Revocar la autorización y pedir la supresión de tus datos, salvo que exista un deber legal o contractual de conservarlos.</li>
+    <li>Acceder de forma gratuita a tus datos personales.</li>
+  </ul>
+
+  <h2>7. Cómo ejercerlos</h2>
+  <p>Escribe a <a href={`mailto:${legal.email}`}>{legal.email}</a> o por WhatsApp al {legal.phone}, indicando tu nombre, cómo contactarte y qué solicitas. Las consultas se responden en máximo 10 días hábiles, prorrogables 5 días hábiles más con aviso del motivo. Los reclamos se responden en máximo 15 días hábiles, prorrogables 8 más. Si no estás conforme, puedes acudir a la Superintendencia de Industria y Comercio.</p>
+
+  <h2>8. Seguridad y conservación</h2>
+  <p>Uso cuentas con contraseña y verificación en dos pasos cuando el proveedor la ofrece, y solo accedo a lo necesario para tu proyecto. Conservo los datos durante la relación comercial y el tiempo que exijan las normas contables, tributarias y contractuales; después los elimino o anonimizo.</p>
+
+  <h2>9. Cambios</h2>
+  <p>Si cambia la identidad del responsable o las finalidades, lo informaré antes de aplicarlo y, si hace falta, pediré una nueva autorización. Esta política rige desde la fecha indicada arriba.</p>
+</Legal>

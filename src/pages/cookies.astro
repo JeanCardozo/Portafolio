@@ -1,0 +1,17 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { legal } from '../data/site';
+---
+<Legal title="Política de cookies" description="Este sitio no usa cookies de analítica ni de publicidad. Esto es lo que guarda y lo que no.">
+  <h2>Qué usa este sitio</h2>
+  <p>No usa cookies de analítica, de publicidad ni de seguimiento, y no guarda información en tu navegador. Las tipografías se sirven desde el mismo sitio, sin pedirlas a terceros.</p>
+
+  <h2>Registros del servidor</h2>
+  <p>Como cualquier sitio, el proveedor de alojamiento (Netlify) puede registrar datos técnicos de la visita, como la dirección IP, para seguridad y funcionamiento. Se rigen por la política de ese proveedor.</p>
+
+  <h2>Enlaces a otros sitios</h2>
+  <p>Al abrir WhatsApp, LinkedIn, GitHub, YouTube o los sitios de mis casos, sales de este sitio y aplican las políticas de esos servicios.</p>
+
+  <h2>Si esto cambia</h2>
+  <p>Si más adelante activo una herramienta de medición que use cookies, lo diré aquí y te pediré tu autorización antes de activarla. Más información sobre datos personales en la <a href="/privacidad/">política de tratamiento</a>. Dudas: <a href={`mailto:${legal.email}`}>{legal.email}</a>.</p>
+</Legal>

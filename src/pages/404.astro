@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import { waLink } from '../data/site';
+---
+<Base title="Página no encontrada · Jean Cardozo" description="La página que buscas no existe." noindex>
+  <section class="hero">
+    <div class="wrap">
+      <h1>Esta página no existe</h1>
+      <p class="lede">Puede que el enlace haya cambiado. Vuelve al inicio o escríbeme y te ayudo a encontrar lo que buscas.</p>
+      <div class="hero-cta">
+        <a class="btn btn-gold" href="/">Ir al inicio</a>
+        <a class="btn btn-ghost" href={waLink('Hola Jean, no encontré una página de tu sitio.')}>Escribirme por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</Base>

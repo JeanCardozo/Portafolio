@@ -1,0 +1,37 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { legal } from '../data/site';
+---
+<Legal title="Términos y condiciones" description="Condiciones de uso del sitio y condiciones generales de los servicios de desarrollo de Jean Cardozo (JeanCRG).">
+  <h2>1. Quién ofrece los servicios</h2>
+  <p>{legal.responsable}, bajo el nombre comercial {legal.trade}, con domicilio en {legal.domicilio}. Contacto: <a href={`mailto:${legal.email}`}>{legal.email}</a>.</p>
+
+  <h2>2. Uso del sitio</h2>
+  <p>El contenido de este sitio es informativo. Los textos, el diseño y el código propios son de su autor; los nombres, marcas y capturas de los sitios de clientes pertenecen a sus titulares y se muestran con su autorización. No puedes copiar el sitio ni presentarlo como tuyo.</p>
+
+  <h2>3. Precios y cotizador</h2>
+  <p>Los precios y plazos del sitio y del cotizador son rangos de referencia en dólares estadounidenses, con equivalente en pesos colombianos a la TRM indicada. No son una oferta vinculante. El precio definitivo, el alcance y el plazo constan en la propuesta o contrato escrito que aceptes. Los pagos se liquidan en pesos colombianos a la TRM del día del pago, salvo que se acuerde otra cosa por escrito.</p>
+
+  <h2>4. Condiciones generales de los servicios</h2>
+  <ul>
+    <li><strong>Anticipo y pago.</strong> 50% para iniciar y 50% al entregar, salvo acuerdo distinto escrito.</li>
+    <li><strong>Plazos.</strong> Corren desde que se reciben el anticipo y los insumos del cliente (textos, fotos, accesos). Los retrasos en insumos o aprobaciones mueven la fecha.</li>
+    <li><strong>Alcance.</strong> Lo no incluido en la propuesta se cotiza aparte.</li>
+    <li><strong>Propiedad.</strong> Dominio, cuentas y código final se entregan a nombre del cliente una vez pagado el total. Conservo el derecho de mostrar el proyecto como caso de portafolio, salvo pacto de confidencialidad por escrito.</li>
+    <li><strong>Garantía.</strong> Corrijo sin costo los errores de funcionamiento reportados dentro de los 30 días posteriores a la entrega. No cubre cambios de alcance ni fallas de terceros.</li>
+    <li><strong>Resultados.</strong> No garantizo posiciones en Google, ventas ni volumen de clientes; esos resultados dependen de factores fuera de mi control.</li>
+    <li><strong>Terceros.</strong> Servicios como hosting, dominio, WhatsApp (Meta) o proveedores de IA tienen sus propios términos y costos, que paga el cliente salvo pacto contrario.</li>
+  </ul>
+
+  <h2>5. Asistentes de WhatsApp con IA</h2>
+  <p>Los asistentes se configuran para atender el negocio del cliente, usan su propia cuenta de la API de WhatsApp y responden solo con la información que el cliente entrega. Pueden equivocarse: por eso incluyen paso a una persona y reportes de conversaciones. El cliente es responsable de revisar el contenido que autoriza y de los mensajes que envía a sus propios clientes, incluida la obtención de su autorización conforme a la Ley 1581 de 2012.</p>
+
+  <h2>6. Responsabilidad</h2>
+  <p>Mi responsabilidad se limita al valor pagado por el servicio específico, salvo dolo o culpa grave, y excluye lucro cesante e indirectos en la medida que la ley lo permita.</p>
+
+  <h2>7. Datos personales</h2>
+  <p>El tratamiento de datos se rige por la <a href="/privacidad/">política de tratamiento de datos personales</a> y la <a href="/cookies/">política de cookies</a>.</p>
+
+  <h2>8. Ley aplicable</h2>
+  <p>Estos términos se rigen por las leyes de Colombia. Las diferencias se buscarán resolver primero por acuerdo directo y, si no es posible, ante los jueces competentes de Ibagué.</p>
+</Legal>

@@ -1,0 +1,19 @@
+# dependencies and build output
+node_modules/
+dist/
+.astro/
+
+# local tooling state
+.netlify/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+.vscode/
+.idea/
+
+# internal working files, not part of the site (market research, pricing basis,
+# legal checklist, contract template, brand source images and banner exports)
+content/
+brand/

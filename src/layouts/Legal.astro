@@ -1,0 +1,16 @@
+---
+import Base from './Base.astro';
+import { legal } from '../data/site';
+interface Props { title: string; description: string; }
+const { title, description } = Astro.props;
+---
+<Base title={`${title} · Jean Cardozo`} description={description}>
+  <section class="hero">
+    <div class="wrap legal">
+      <p class="crumb ui"><a href="/">Inicio</a> / {title}</p>
+      <h1>{title}</h1>
+      <p class="meta ui">Versión {legal.version} · Actualizada el {legal.updated}</p>
+      <slot />
+    </div>
+  </section>
+</Base>

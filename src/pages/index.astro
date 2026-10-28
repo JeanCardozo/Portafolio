@@ -1,0 +1,300 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, tiers, addons, care, agentMonthly, hourly, trm, waLink } from '../data/site';
+import { services } from '../data/services';
+
+const usd = (n: number) => n.toLocaleString('es-CO');
+const weeks = (d: [number, number]) => (d[1] <= 15 ? `${d[0]} a ${d[1]} días hábiles` : `${Math.round(d[0] / 5)} a ${Math.round(d[1] / 5)} semanas`);
+const title = 'Páginas web, software y asistentes de WhatsApp con IA · JeanCRG';
+const description = 'Desarrollador full-stack en Ibagué: páginas web con SEO local, tiendas, software a la medida y asistentes de WhatsApp con IA. Cotiza en 30 segundos.';
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: `${site.brand} · ${site.name}`,
+    description,
+    areaServed: 'CO',
+    address: { '@type': 'PostalAddress', addressLocality: 'Ibagué', addressRegion: 'Tolima', addressCountry: 'CO' },
+    founder: { '@type': 'Person', name: 'Jean Cardozo Ramírez', sameAs: [site.linkedin, site.github, site.youtube] },
+    knowsAbout: ['Desarrollo web', 'SEO local', 'Tiendas en línea', 'Software a la medida', 'WhatsApp Business API', 'Automatización con n8n', 'React', 'TypeScript', 'Supabase'],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Servicios',
+      itemListElement: services.map((x) => ({
+        '@type': 'Offer',
+        priceCurrency: 'USD',
+        price: x.from,
+        itemOffered: { '@type': 'Service', name: x.name, url: `${Astro.site!.href}servicios/${x.slug}/` },
+      })),
+    },
+  },
+  { '@context': 'https://schema.org', '@type': 'WebSite', name: `${site.brand} · ${site.name}`, url: Astro.site!.href, inLanguage: 'es-CO' },
+];
+---
+<Base title={title} description={description} schema={schema}>
+  <section class="hero hero-dark">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Que te encuentren en Google y te atiendan por WhatsApp, aunque estés ocupado.</h1>
+        <p class="lede">Diseño y programo sitios web con SEO local, tiendas en línea y asistentes de WhatsApp con IA que responden, toman datos y te pasan al cliente cuando hace falta una persona.</p>
+        <div class="hero-cta">
+          <a class="btn btn-gold" href="#cotizador">Calcular mi presupuesto</a>
+          <a class="btn btn-ghost" href="#casos">Ver casos reales</a>
+        </div>
+        <p class="who">Soy Jean Cardozo, desarrollador full-stack en Ibagué. Trabajo con clientes en toda Colombia y de forma remota.</p>
+        <ul class="hero-proof ui" aria-label="Resultados">
+          <li><b>50+</b> clientes nuevos en las primeras semanas de dos negocios de Ibagué</li>
+          <li><b>2 a 3 semanas</b> para un sitio corporativo</li>
+          <li><b>Precio en dólares</b>, con referencia en pesos</li>
+        </ul>
+      </div>
+
+      <form class="quote" id="cotizador" aria-labelledby="q-title" novalidate>
+        <h2 id="q-title">Cotizador rápido</h2>
+        <fieldset>
+          <legend>1. ¿Qué necesitas?</legend>
+          {tiers.map((t, i) => (
+            <label class="opt">
+              <input type="radio" name="tier" value={t.id} checked={i === 0} />
+              <span><b>{t.name} · desde USD {usd(t.from)}</b><small>{t.note} Entrega: {weeks(t.days)}.</small></span>
+            </label>
+          ))}
+        </fieldset>
+        <details class="extras" id="extras">
+          <summary>2. ¿Quieres sumar algo? <small>(opcional)</small></summary>
+          <fieldset>
+          {addons.map((a) => (
+            <label class="opt">
+              <input type="checkbox" name="addon" value={a.id} />
+              <span><b>{a.name} · desde USD {usd(a.from)}</b><small>{a.note}</small></span>
+            </label>
+          ))}
+          <label class="opt">
+            <input type="checkbox" name="care" value="care" />
+            <span><b>Plan mensual de cuidado · USD {care.from} a {care.to} al mes</b><small>{care.note}</small></span>
+          </label>
+          </fieldset>
+        </details>
+        <div class="field">
+          <label for="biz">3. ¿Cómo se llama tu negocio? <small>(opcional)</small></label>
+          <input id="biz" name="biz" type="text" maxlength="60" autocomplete="organization" placeholder="Ej: Panadería La Esquina" />
+        </div>
+        <div class="total" aria-live="polite">
+          <div class="amount">USD <mark id="range">—</mark></div>
+          <p id="cop"></p>
+          <p id="eta"></p>
+          <p id="monthly"></p>
+          <p>Es un rango de referencia. Te doy el precio cerrado después de una llamada corta, sin costo.</p>
+        </div>
+        <a class="btn btn-gold" id="send" href={waLink('Hola Jean, quiero cotizar.')} data-track="wa_quote">Enviar esta cotización por WhatsApp</a>
+      </form>
+    </div>
+  </section>
+
+  <section class="sec-alt" id="demanda">
+    <div class="wrap">
+      <h2>Lo que más se está pidiendo, y lo que ya sé hacer</h2>
+      <ul class="demand">
+        <li>
+          <h3>Tiendas en línea</h3>
+          <p>El comercio electrónico en Colombia creció 22,2% en número de transacciones en el primer trimestre de 2026, según la Cámara Colombiana de Comercio Electrónico. Hago tiendas con carrito, pedido por WhatsApp y pagos locales.</p>
+        </li>
+        <li>
+          <h3>Integración de IA en el negocio</h3>
+          <p>En Upwork, la demanda por integrar IA en software creció 178% y la de chatbots 71% en el último año medido. Conecto WhatsApp, n8n y modelos de IA con tus datos y siempre dejo una salida a una persona.</p>
+        </li>
+        <li>
+          <h3>SEO local</h3>
+          <p>Una agencia cobra entre 650.000 y 1.500.000 pesos al mes por posicionar un negocio local. Yo dejo el SEO aplicado desde el primer día: datos estructurados, ficha de Google, sitemap y textos para búsquedas de tu ciudad.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="servicios">
+    <div class="wrap">
+      <h2>Del sitio simple al software a la medida, con IA como siguiente paso</h2>
+      <p class="lede">Empiezas por lo que tu negocio necesita hoy. Todo se puede ampliar después sin rehacer nada.</p>
+      <div class="tier-list">
+        {tiers.map((t) => (
+          <div class="tier">
+            <h3>{t.name}</h3>
+            <p>{t.note}</p>
+            <div class="price">USD {usd(t.from)} a {usd(t.to)}<small>≈ {(t.from * trm.cop / 1e6).toFixed(1)} a {(t.to * trm.cop / 1e6).toFixed(1)} M COP · {weeks(t.days)}</small></div>
+          </div>
+        ))}
+        <div class="tier">
+          <h3>Asistente de WhatsApp con IA</h3>
+          <p>Responde preguntas frecuentes, toma pedidos o citas, recuerda a quien no confirmó y avisa a una persona cuando el caso lo requiere.</p>
+          <div class="price">USD {usd(addons[1].from)} a {usd(addons[1].to)}<small>más USD {agentMonthly.from} a {agentMonthly.to} al mes según uso · 1 a 2 semanas</small></div>
+        </div>
+      </div>
+      <p class="fx ui">Para agencias y equipos que necesitan refuerzo: desarrollo full-stack por horas, USD {hourly.from} a {hourly.to}.</p>
+      <ul class="svc-links ui">
+        {services.map((x) => <li><a href={`/servicios/${x.slug}/`}>{x.name}: detalle, preguntas y precios</a></li>)}
+      </ul>
+      <p class="fx ui">Pesos calculados con la TRM del {trm.date}: {usd(trm.cop)} COP por dólar. Pagas en pesos al cambio del día.</p>
+      <div class="ladder">Cada sitio se entrega con una idea de <strong>siguiente paso</strong>: primero te encuentran, después te atienden solos por WhatsApp, y un plan mensual lo mantiene funcionando.</div>
+    </div>
+  </section>
+
+  <section class="sec-alt" id="casos">
+    <div class="wrap">
+      <h2>Casos: problema, decisión y qué quedó</h2>
+
+      <article class="case">
+        <div>
+          <span class="status">En producción</span>
+          <h3>Tecni Center</h3>
+          <p>Taller de reparación de TV y sonido en Ibagué.</p>
+          <div class="tags"><span>Astro</span><span>SEO local</span><span>JSON-LD</span><span>WhatsApp</span></div>
+          <p style="margin-top:1.2rem"><a class="ui" href="https://tecnicenter.netlify.app" rel="noopener">Ver el sitio</a> · <a class="ui" href="https://github.com/JeanCardozo/TecniCenter" rel="noopener">Ver el código</a></p>
+        </div>
+        <div>
+          <figure class="shot">
+            <img src="/casos/tecnicenter-desktop.jpg" width="1280" height="800" loading="lazy" alt="Página de inicio de Tecni Center con la orden de servicio interactiva" />
+            <img class="m" src="/casos/tecnicenter-mobile.jpg" width="780" height="1560" loading="lazy" alt="Tecni Center en el celular" />
+          </figure>
+          <dl>
+            <div><dt>Problema</dt><dd>El taller salía en Google con 5,0 de calificación, pero no tenía sitio web: nadie a quien llevar, ni contacto directo, ni medición.</dd></div>
+            <div><dt>Decisión</dt><dd>Un sitio estático rápido cuyo centro es una orden de servicio interactiva: el cliente elige equipo, marca y falla, y el mensaje de WhatsApp se escribe solo. Datos estructurados del negocio, preguntas frecuentes, sitemap y analítica con consentimiento.</dd></div>
+            <div><dt>Qué quedó</dt><dd>Sitio en línea de 43 KB en la página de inicio, con botones de llamada y WhatsApp fijos en móvil. Entre este sitio y el de La Tertulia llegaron más de 50 clientes nuevos en las primeras semanas de operación digital.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="case">
+        <div>
+          <span class="status">En producción</span>
+          <h3>La Tertulia Café</h3>
+          <p>Café y panadería en Ibagué con pedidos por WhatsApp.</p>
+          <div class="tags"><span>Next.js</span><span>Supabase</span><span>Panel de administración</span><span>SEO local</span></div>
+          <p style="margin-top:1.2rem"><a class="ui" href="https://la-tertulia-cafe.vercel.app" rel="noopener">Ver el sitio</a></p>
+        </div>
+        <div>
+          <figure class="shot">
+            <img src="/casos/tertulia-desktop.jpg" width="1280" height="800" loading="lazy" alt="Página de inicio de La Tertulia Café" />
+            <img class="m" src="/casos/tertulia-mobile.jpg" width="780" height="1560" loading="lazy" alt="La Tertulia Café en el celular" />
+          </figure>
+          <dl>
+            <div><dt>Problema</dt><dd>La carta cambia cada día y los pedidos llegaban por mensajes sueltos, sin un lugar donde el cliente arme su pedido ni donde el dueño actualice precios.</dd></div>
+            <div><dt>Decisión</dt><dd>Un sitio donde el cliente arma el carrito, elige recogida o domicilio con mapa y envía el pedido ya escrito por WhatsApp. El dueño edita productos y fotos desde un panel protegido, y los cambios se publican solos.</dd></div>
+            <div><dt>Qué quedó</dt><dd>Sitio en línea que carga en menos de medio segundo desde mi equipo, con datos estructurados de panadería y cafetería, sitemap, políticas legales y cabeceras de seguridad. Entre este sitio y el de TecniCenter llegaron más de 50 clientes nuevos en las primeras semanas de operación digital.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="case">
+        <div>
+          <span class="status">Demo bajo solicitud</span>
+          <h3>chatAI</h3>
+          <p>Sistema de asistentes de WhatsApp con IA para varios negocios a la vez.</p>
+          <div class="tags"><span>WhatsApp Cloud API</span><span>n8n</span><span>Supabase</span><span>RLS</span></div>
+        </div>
+        <dl>
+          <div><dt>Problema</dt><dd>Muchos negocios venden por WhatsApp y pierden clientes que preguntan y nadie vuelve a escribirles.</dd></div>
+          <div><dt>Decisión</dt><dd>Usar la API oficial de Meta, verificar la firma de cada mensaje, separar los datos de cada negocio con reglas a nivel de fila y dejar siempre una salida a una persona.</dd></div>
+          <div><dt>Qué quedó</dt><dd>Un sistema funcionando de punta a punta con panel y reporte semanal. Aún no tiene clientes de pago: te muestro una demo en vivo antes de que decidas.</dd></div>
+        </dl>
+      </article>
+
+      <article class="case">
+        <div>
+          <span class="status wip">En desarrollo</span>
+          <h3>Fresko</h3>
+          <p>Plataforma móvil y web para administrar conjuntos residenciales.</p>
+          <div class="tags"><span>React Native</span><span>Expo</span><span>Supabase</span><span>Roles</span></div>
+        </div>
+        <dl>
+          <div><dt>Problema</dt><dd>Las administradoras manejan pagos, reservas, mudanzas y quejas entre WhatsApp, correo y llamadas.</dd></div>
+          <div><dt>Decisión</dt><dd>Una sola aplicación con cuatro niveles de acceso, módulos que se activan por conjunto y aislamiento de datos por reglas en la base.</dd></div>
+          <div><dt>Qué quedó</dt><dd>Estoy construyéndola con mi socio en NativaSoft. Es el ejemplo de lo que puedo hacer cuando un sitio necesita convertirse en aplicación.</dd></div>
+        </dl>
+      </article>
+    </div>
+  </section>
+
+  <section id="dudas">
+    <div class="wrap">
+      <h2>Lo que suelen preguntar antes de contratar</h2>
+      <div class="faq">
+        <details><summary>¿Por qué no usar una plantilla de 200 dólares?</summary><p>Puedes hacerlo si solo necesitas existir en internet. Mis sitios están hechos para que te encuentren en tu ciudad y para que cada visita termine en una conversación de WhatsApp contigo. Eso se diseña desde el primer día.</p></details>
+        <details><summary>¿De quién es el sitio cuando termine?</summary><p>Tuyo. El dominio, las cuentas y el código quedan a tu nombre, y lo dejamos escrito en la propuesta.</p></details>
+        <details><summary>¿Y si la IA le dice algo incorrecto a mi cliente?</summary><p>El asistente solo responde con la información que tú le das, tiene un tope de mensajes por día y, cuando no sabe o el cliente lo pide, avisa a una persona. Revisas las conversaciones en un reporte semanal.</p></details>
+        <details><summary>¿Cuánto tarda?</summary><p>Un sitio simple, de 5 a 8 días hábiles. Uno corporativo, de 2 a 3 semanas. Una tienda, de 3 a 5; uno sofisticado, de 5 a 8, y el software a la medida, de 6 a 12 según alcance. El plazo empieza cuando tengo tus textos, fotos y el anticipo. Te doy la fecha por escrito antes de empezar.</p></details>
+        <details><summary>¿Cómo se paga?</summary><p>La mitad para empezar y la otra mitad al entregar. Nada de contratos largos. Si trabajas en pesos, se liquida al cambio del día del pago.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec-alt" id="sobre-mi">
+    <div class="wrap about">
+      <div>
+        <h2>Quién va a hacer tu proyecto</h2>
+        <p class="ui" style="margin-top:1.2rem"><a class="btn btn-ghost" href="/CV_JeanCardozo.pdf" download>Descargar mi CV (PDF)</a></p>
+      </div>
+      <div>
+        <p>Soy desarrollador full-stack. Trabajo con React, Next.js, Astro, Node, TypeScript y Supabase, y conecto WhatsApp con IA usando n8n.</p>
+        <p>Antes trabajé en una distribuidora ferretera con más de 100 aliados y en TurriSystem, donde desarrollé un microservicio que soportó 900 usuarios al tiempo. Hoy construyo Fresko con mi socio en NativaSoft y atiendo proyectos propios de sitios y asistentes.</p>
+        <p>Estudio Ingeniería de Sistemas y aprendo cada semana. Si tu proyecto necesita algo que todavía no he hecho, te lo digo desde la primera llamada.</p>
+        <div class="recruit">
+          <h3>Si revisas mi CV</h3>
+          <p>Este portafolio es el que cito en mi hoja de vida. Aquí está lo que puedes comprobar:</p>
+          <ul>
+            <li>Dos sitios reales en línea con SEO aplicado: <a href="https://tecnicenter.netlify.app" rel="noopener">TecniCenter</a> y <a href="https://la-tertulia-cafe.vercel.app" rel="noopener">La Tertulia</a>.</li>
+            <li>Código de TecniCenter en <a href={`${site.github}/TecniCenter`} rel="noopener">GitHub</a>.</li>
+            <li>Stack: React, Next.js, Astro, Node, TypeScript, PostgreSQL, Supabase, n8n y WhatsApp Cloud API.</li>
+            <li>Busco contratos remotos en desarrollo web e integración de IA.</li>
+          </ul>
+        </div>
+        <p style="margin-top:1.2rem"><a class="ui" href={site.linkedin} rel="me noopener">Ver mi LinkedIn</a> · <a class="ui" href={site.github} rel="me noopener">GitHub</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-final">
+    <div class="wrap">
+      <h2>Cuéntame qué necesita tu negocio</h2>
+      <p class="lede">Respondo por WhatsApp. La primera conversación y el diagnóstico no tienen costo.</p>
+      <div class="hero-cta">
+        <a class="btn btn-gold" href={waLink('Hola Jean, vi tu portafolio y quiero hablar de mi proyecto.')} data-track="wa_final">Escribirme por WhatsApp</a>
+        <a class="btn btn-ghost" href={`mailto:${site.email}`}>Escribir por correo</a>
+      </div>
+    </div>
+  </section>
+
+  <script define:vars={{ tiers, addons, care, agentMonthly, trm, phone: site.phone }}>
+    const form = document.getElementById('cotizador');
+    const n = (v) => v.toLocaleString('es-CO');
+    const mcop = (usd) => (usd * trm.cop / 1e6).toLocaleString('es-CO', { maximumFractionDigits: 1 });
+    const eta = (lo, hi) => (hi <= 15 ? `${lo} a ${hi} días hábiles` : `${Math.round(lo / 5)} a ${Math.round(hi / 5)} semanas`);
+    function update() {
+      const tier = tiers.find((t) => t.id === form.tier.value);
+      const picked = addons.filter((a) => form.querySelector(`input[name=addon][value=${a.id}]`).checked);
+      const from = tier.from + picked.reduce((s, a) => s + a.from, 0);
+      const to = tier.to + picked.reduce((s, a) => s + a.to, 0);
+      const dLo = tier.days[0] + picked.reduce((s, a) => s + a.days[0], 0);
+      const dHi = tier.days[1] + picked.reduce((s, a) => s + a.days[1], 0);
+      const withCare = form.care.checked;
+      const withAgent = picked.some((a) => a.id === 'agente');
+      document.getElementById('range').textContent = `${n(from)} a ${n(to)}`;
+      document.getElementById('cop').textContent = `≈ ${mcop(from)} a ${mcop(to)} millones de pesos (TRM ${n(trm.cop)}).`;
+      document.getElementById('eta').textContent = `Entrega estimada: ${eta(dLo, dHi)} desde que tengo tus textos y el anticipo.`;
+      const monthly = [];
+      if (withCare) monthly.push(`plan de cuidado USD ${care.from} a ${care.to}`);
+      if (withAgent) monthly.push(`asistente de IA USD ${agentMonthly.from} a ${agentMonthly.to} según uso`);
+      document.getElementById('monthly').textContent = monthly.length ? `Mensual aparte: ${monthly.join(' y ')}.` : '';
+      const biz = form.biz.value.trim();
+      const lines = [`Hola Jean, quiero cotizar: ${tier.name}`, ...picked.map((a) => `+ ${a.name}`)];
+      if (withCare) lines.push('+ Plan mensual de cuidado');
+      if (biz) lines.push(`Mi negocio: ${biz}`);
+      lines.push(`Rango que vi: USD ${n(from)} a ${n(to)}, entrega ${eta(dLo, dHi)}.`);
+      document.getElementById('send').href = `https://wa.me/${phone}?text=${encodeURIComponent(lines.join('\n'))}`;
+    }
+    if (matchMedia('(min-width: 900px)').matches) document.getElementById('extras').open = true;
+    form.addEventListener('input', update);
+    form.addEventListener('change', update);
+    form.addEventListener('submit', (e) => e.preventDefault());
+    update();
+  </script>
+</Base>
