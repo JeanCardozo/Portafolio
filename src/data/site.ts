@@ -22,7 +22,7 @@ export const legal = {
 };
 
 // TRM on 2026-10-27 (dolar-colombia.com / Banco de la República). Update when quoting.
-export const trm = { cop: 3158, date: '27 oct 2026' };
+export const trm = { cop: 3462, date: '23 nov 2026' };
 
 // days = business days [min, max]
 export type Tier = { id: string; name: string; from: number; to: number; days: [number, number]; note: string };
