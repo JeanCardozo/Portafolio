@@ -1,10 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
-import { site, tiers, addons, care, agentMonthly, hourly, trm, waLink } from '../data/site';
+import { site, tiers, addons, care, agentMonthly, hourly, trm, waLink, offer } from '../data/site';
 import { services } from '../data/services';
 
 const usd = (n: number) => n.toLocaleString('es-CO');
 const weeks = (d: [number, number]) => (d[1] <= 15 ? `${d[0]} a ${d[1]} días hábiles` : `${Math.round(d[0] / 5)} a ${Math.round(d[1] / 5)} semanas`);
+const copFmt = offer.cop.toLocaleString('es-CO');
 const title = 'Páginas web, software y asistentes de WhatsApp con IA · JeanCRG';
 const description = 'Desarrollador full-stack en Ibagué: páginas web con SEO local, tiendas, software a la medida y asistentes de WhatsApp con IA. Cotiza en 30 segundos.';
 const schema = [
@@ -33,61 +34,18 @@ const schema = [
 ---
 <Base title={title} description={description} schema={schema}>
   <section class="hero hero-dark">
-    <div class="wrap hero-grid">
-      <div>
-        <h1>Que te encuentren en Google y te atiendan por WhatsApp, aunque estés ocupado.</h1>
-        <p class="lede">Diseño y programo sitios web con SEO local, tiendas en línea y asistentes de WhatsApp con IA que responden, toman datos y te pasan al cliente cuando hace falta una persona.</p>
+    <div class="wrap hero-grid" style="grid-template-columns:1fr">
+      <div style="max-width:52rem">
+        <h1>{offer.name}: ${copFmt} COP, listo en {offer.days} días hábiles.</h1>
+        <p class="lede">Una página rápida con SEO local que lleva a quien te busca en Google directo a tu WhatsApp. Precio cerrado, sin sorpresas: {offer.upfront}% para empezar y {100 - offer.upfront}% al entregar. El plazo cuenta desde que tengo tus textos, fotos y el anticipo.</p>
         <div class="hero-cta">
-          <a class="btn btn-gold" href="#cotizador">Calcular mi presupuesto</a>
-          <a class="btn btn-ghost" href="#casos">Ver casos reales</a>
+          <a class="btn btn-gold" href={waLink(`Hola Jean, quiero el ${offer.name.toLowerCase()} por $${copFmt} COP en ${offer.days} días hábiles. Mi negocio es:`)} data-track="wa_hero">Quiero mi sitio por WhatsApp</a>
         </div>
-        <p class="who">Soy Jean Cardozo, desarrollador full-stack en Ibagué. Trabajo con clientes en toda Colombia y de forma remota.</p>
+        <p class="who">Soy Jean Cardozo, desarrollador full-stack en Ibagué. Trabajo con clientes en toda Colombia y de forma remota. Para tienda en línea, asistente de IA o software a la medida, <a href="#cotizador">calcula tu presupuesto</a>.</p>
         <ul class="hero-proof ui" aria-label="Resultados">
-          <li><b>50+</b> clientes nuevos en las primeras semanas de dos negocios de Ibagué</li>
-          <li><b>2 a 3 semanas</b> para un sitio corporativo</li>
-          <li><b>Precio en dólares</b>, con referencia en pesos</li>
+          <li><b>50+</b> clientes nuevos en las primeras semanas de dos negocios de Ibagué (<a href="#casos">ver casos</a>)</li>
         </ul>
       </div>
-
-      <form class="quote" id="cotizador" aria-labelledby="q-title" novalidate>
-        <h2 id="q-title">Cotizador rápido</h2>
-        <fieldset>
-          <legend>1. ¿Qué necesitas?</legend>
-          {tiers.map((t, i) => (
-            <label class="opt">
-              <input type="radio" name="tier" value={t.id} checked={i === 0} />
-              <span><b>{t.name} · desde USD {usd(t.from)}</b><small>{t.note} Entrega: {weeks(t.days)}.</small></span>
-            </label>
-          ))}
-        </fieldset>
-        <details class="extras" id="extras">
-          <summary>2. ¿Quieres sumar algo? <small>(opcional)</small></summary>
-          <fieldset>
-          {addons.map((a) => (
-            <label class="opt">
-              <input type="checkbox" name="addon" value={a.id} />
-              <span><b>{a.name} · desde USD {usd(a.from)}</b><small>{a.note}</small></span>
-            </label>
-          ))}
-          <label class="opt">
-            <input type="checkbox" name="care" value="care" />
-            <span><b>Plan mensual de cuidado · USD {care.from} a {care.to} al mes</b><small>{care.note}</small></span>
-          </label>
-          </fieldset>
-        </details>
-        <div class="field">
-          <label for="biz">3. ¿Cómo se llama tu negocio? <small>(opcional)</small></label>
-          <input id="biz" name="biz" type="text" maxlength="60" autocomplete="organization" placeholder="Ej: Panadería La Esquina" />
-        </div>
-        <div class="total" aria-live="polite">
-          <div class="amount">USD <mark id="range">—</mark></div>
-          <p id="cop"></p>
-          <p id="eta"></p>
-          <p id="monthly"></p>
-          <p>Es un rango de referencia. Te doy el precio cerrado después de una llamada corta, sin costo.</p>
-        </div>
-        <a class="btn btn-gold" id="send" href={waLink('Hola Jean, quiero cotizar.')} data-track="wa_quote">Enviar esta cotización por WhatsApp</a>
-      </form>
     </div>
   </section>
 
@@ -211,6 +169,51 @@ const schema = [
           <div><dt>Qué quedó</dt><dd>Estoy construyéndola con mi socio en NativaSoft. Es el ejemplo de lo que puedo hacer cuando un sitio necesita convertirse en aplicación.</dd></div>
         </dl>
       </article>
+    </div>
+  </section>
+
+  <section class="sec-alt" id="cotizador-sec">
+    <div class="wrap" style="max-width:44rem">
+      <h2>¿Necesitas algo distinto? Calcula tu presupuesto</h2>
+      <form class="quote" id="cotizador" aria-labelledby="q-title" novalidate>
+        <h2 id="q-title">Cotizador rápido</h2>
+        <fieldset>
+          <legend>1. ¿Qué necesitas?</legend>
+          {tiers.map((t, i) => (
+            <label class="opt">
+              <input type="radio" name="tier" value={t.id} checked={i === 0} />
+              <span><b>{t.name} · desde USD {usd(t.from)}</b><small>{t.note} Entrega: {weeks(t.days)}.</small></span>
+            </label>
+          ))}
+        </fieldset>
+        <details class="extras" id="extras">
+          <summary>2. ¿Quieres sumar algo? <small>(opcional)</small></summary>
+          <fieldset>
+          {addons.map((a) => (
+            <label class="opt">
+              <input type="checkbox" name="addon" value={a.id} />
+              <span><b>{a.name} · desde USD {usd(a.from)}</b><small>{a.note}</small></span>
+            </label>
+          ))}
+          <label class="opt">
+            <input type="checkbox" name="care" value="care" />
+            <span><b>Plan mensual de cuidado · USD {care.from} a {care.to} al mes</b><small>{care.note}</small></span>
+          </label>
+          </fieldset>
+        </details>
+        <div class="field">
+          <label for="biz">3. ¿Cómo se llama tu negocio? <small>(opcional)</small></label>
+          <input id="biz" name="biz" type="text" maxlength="60" autocomplete="organization" placeholder="Ej: Panadería La Esquina" />
+        </div>
+        <div class="total" aria-live="polite">
+          <div class="amount">USD <mark id="range">—</mark></div>
+          <p id="cop"></p>
+          <p id="eta"></p>
+          <p id="monthly"></p>
+          <p>Es un rango de referencia. Te doy el precio cerrado después de una llamada corta, sin costo.</p>
+        </div>
+        <a class="btn btn-gold" id="send" href={waLink('Hola Jean, quiero cotizar.')} data-track="wa_quote">Enviar esta cotización por WhatsApp</a>
+      </form>
     </div>
   </section>
 
