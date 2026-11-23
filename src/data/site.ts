@@ -49,3 +49,12 @@ export const care = { from: 60, to: 120, note: 'hosting, cambios pequeños y mon
 export const agentMonthly = { from: 60, to: 150 };
 
 export const waLink = (text: string) => `https://wa.me/${site.phone}?text=${encodeURIComponent(text)}`;
+
+// Main fixed-price offer: mid of the "simple" tier, in COP at the current TRM, rounded to 50K. Update with TRM.
+export const offer = {
+  name: 'Sitio web que te trae clientes por WhatsApp',
+  usd: 450,
+  cop: Math.round((450 * trm.cop) / 50000) * 50000,
+  days: tiers[0].days[1],
+  upfront: 50,
+};
