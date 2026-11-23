@@ -252,3 +252,11 @@ section { padding-block: clamp(3.5rem, 8vw, 6.5rem); }
 
 /* external-link hint for screen readers (added by scripts/external-links.mjs) */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* v7: numbers band and problem list */
+.numbers { padding-block: 2rem; background: var(--bone); border-bottom: 1px solid var(--line); }
+.numbers .facts { border: 0; background: transparent; gap: 1rem; }
+.numbers .facts div { border: 1px solid var(--line); border-radius: 6px; background: #fff; padding: 1.1rem 1.2rem; }
+.numbers .facts b { font-size: 2.1rem; }
+.facts small { display: block; margin-top: .45rem; font: .78rem/1.35 var(--f-ui); color: var(--slate); }
+.problem-close { margin-top: 1.6rem; font-size: 1.1rem; max-width: 62ch; }

@@ -7,8 +7,8 @@ import { ids, personNode } from '../data/schema';
 const usd = (n: number) => n.toLocaleString('es-CO');
 const weeks = (d: [number, number]) => (d[1] <= 15 ? `${d[0]} a ${d[1]} días hábiles` : `${Math.round(d[0] / 5)} a ${Math.round(d[1] / 5)} semanas`);
 const copFmt = offer.cop.toLocaleString('es-CO');
-const title = 'Páginas web, software y asistentes de WhatsApp con IA · JeanCRG';
-const description = 'Desarrollador full-stack en Ibagué: páginas web con SEO local, tiendas, software a la medida y asistentes de WhatsApp con IA. Cotiza en 30 segundos.';
+const title = 'Sitios web que traen clientes por WhatsApp · JeanCRG';
+const description = 'Desarrollador full-stack en Ibagué. Sitios web con SEO local, tiendas, asistentes de WhatsApp con IA y software a la medida. 50+ clientes nuevos en dos casos.';
 const base = Astro.site!.href.replace(/\/$/, '');
 const schema = [
   {
@@ -52,16 +52,16 @@ const schema = [
     <div class="wrap hero-grid">
       <div>
         <h1>{offer.name}: ${copFmt} COP, listo en {offer.days} días hábiles.</h1>
-        <p class="lede">Una página rápida con SEO local que lleva a quien te busca en Google directo a tu WhatsApp. Precio cerrado, sin sorpresas: {offer.upfront}% para empezar y {100 - offer.upfront}% al entregar. El plazo cuenta desde que tengo tus textos, fotos y el anticipo.</p>
+        <p class="lede">Mis dos últimos sitios, Tecni Center y La Tertulia, sumaron más de 50 clientes nuevos en sus primeras semanas en línea. Te construyo lo mismo: una página rápida con SEO local que lleva a quien te busca en Google directo a tu WhatsApp. Precio cerrado: {offer.upfront}% para empezar y {100 - offer.upfront}% al entregar. El plazo corre desde que tengo tus textos, fotos y el anticipo.</p>
         <div class="hero-cta">
           <a class="btn btn-gold" href={waLink(`Hola Jean, quiero el ${offer.name.toLowerCase()} por $${copFmt} COP en ${offer.days} días hábiles. Mi negocio es:`)} data-track="wa_hero">Quiero mi sitio por WhatsApp</a>
           <a class="btn btn-ghost" href="#casos">Ver trabajos reales</a>
         </div>
-        <p class="who">Soy Jean Cardozo, desarrollador full-stack en Ibagué: reunión presencial en la ciudad o por videollamada para el resto de Colombia. Para tienda en línea, asistente de IA o software a la medida, <a href="#cotizador">calcula tu presupuesto</a>.</p>
+        <p class="who">Soy Jean Cardozo, desarrollador full-stack en Ibagué (reunión presencial en la ciudad o videollamada en el resto de Colombia). ¿Tu problema es otro? Una tienda, un asistente de IA, un sistema a la medida: <a href="#cotizador">calcula tu presupuesto</a> o cuéntamelo, y en la primera conversación te digo si puedo resolverlo y cómo.</p>
         <ul class="hero-proof ui" aria-label="Por qué confiar">
-          <li><b>50+</b> clientes nuevos en las primeras semanas de dos negocios de Ibagué (<a href="/casos/tecnicenter/">Tecni Center</a> y <a href="/casos/la-tertulia/">La Tertulia</a>)</li>
-          <li><b>Todo a tu nombre:</b> dominio, cuentas y código, con 30 días de garantía (<a href="/como-trabajo/">cómo trabajo</a>)</li>
-          <li><b>Lighthouse 98 y 97</b> de rendimiento en esos dos sitios, medido el 23 de nov de 2026</li>
+          <li><b>50+ clientes nuevos</b> en las primeras semanas de dos negocios de Ibagué (<a href="/casos/tecnicenter/">Tecni Center</a> y <a href="/casos/la-tertulia/">La Tertulia</a>)</li>
+          <li><b>Lighthouse 98 y 97</b> de rendimiento en esos sitios, medido el 23 de nov de 2026</li>
+          <li><b>Todo a tu nombre</b> y 30 días de garantía (<a href="/como-trabajo/">cómo trabajo</a>)</li>
         </ul>
       </div>
       <figure class="hero-shots" aria-label="Sitios publicados">
@@ -71,29 +71,47 @@ const schema = [
     </div>
   </section>
 
-  <section class="sec-alt" id="demanda">
+  <section class="numbers" aria-label="Resultados en números">
+    <div class="wrap facts">
+      <div><b>50+</b><span>clientes nuevos en las primeras semanas de dos negocios de Ibagué</span><small>Verificado por mí con los dueños</small></div>
+      <div><b>97 a 100</b><span>puntaje de rendimiento en Lighthouse de los sitios publicados</span><small>Medido el 23 de nov de 2026, perfil móvil</small></div>
+      <div><b>900</b><span>usuarios simultáneos soportó un microservicio de exámenes que desarrollé</span><small>TurriSystem, 2025</small></div>
+      <div><b>30 días</b><span>de garantía para corregir errores sin costo</span><small>Queda en la propuesta</small></div>
+    </div>
+  </section>
+
+  <section class="sec-alt" id="problemas">
     <div class="wrap">
-      <h2>Lo que más se está pidiendo, y lo que ya sé hacer</h2>
+      <h2>Los problemas que resuelvo, con números</h2>
       <ul class="demand">
         <li>
-          <h3>Tiendas en línea</h3>
-          <p>El comercio electrónico en Colombia creció 22,2% en número de transacciones en el primer trimestre de 2026, según la <a href="https://ccce.org.co/" rel="noopener">Cámara Colombiana de Comercio Electrónico</a>. Hago tiendas con carrito, pedido por WhatsApp y pagos locales.</p>
+          <h3>No te encuentran en Google</h3>
+          <p>Tecni Center tenía 5,0 de calificación y 25 reseñas, pero ningún sitio a dónde llevar a quien lo buscaba. Hoy tiene una web con SEO local, Lighthouse de 98 y un botón directo a WhatsApp. <a href="/casos/tecnicenter/">Ver el caso</a>.</p>
         </li>
         <li>
-          <h3>Integración de IA en el negocio</h3>
-          <p>En <a href="https://investors.upwork.com/news-releases/news-release-details/upworks-demand-skills-2026-demand-top-ai-skills-more-doubles-ai" rel="noopener">Upwork</a>, la demanda por integrar IA en software creció 178% y la de chatbots 71% en el último año medido. Conecto WhatsApp, n8n y modelos de IA con tus datos y siempre dejo una salida a una persona.</p>
+          <h3>Te escriben por WhatsApp y nadie vuelve a responder</h3>
+          <p>Según <a href="https://chately.co/blog/crm-whatsapp-colombia" rel="noopener">Chately</a>, el 87% de las mipymes colombianas vende por WhatsApp y solo el 25% tiene herramientas de gestión. Un asistente con IA responde, toma datos y pasa a una persona. <a href="/servicios/asistente-whatsapp-ia/">Ver la demo</a>.</p>
         </li>
         <li>
-          <h3>SEO local</h3>
-          <p>Una agencia cobra entre 650.000 y 1.500.000 pesos al mes por posicionar un negocio local. Yo dejo el SEO aplicado desde el primer día: datos estructurados, ficha de Google, sitemap y textos para búsquedas de tu ciudad.</p>
+          <h3>Quieres vender en línea</h3>
+          <p>El comercio electrónico en Colombia creció 22,2% en transacciones en el primer trimestre de 2026, según la <a href="https://ccce.org.co/" rel="noopener">Cámara Colombiana de Comercio Electrónico</a>. La Tertulia recibe pedidos con carrito, domicilio con mapa y un panel que el dueño edita solo. <a href="/casos/la-tertulia/">Ver el caso</a>.</p>
+        </li>
+        <li>
+          <h3>Tu proceso vive en Excel, mensajes y llamadas</h3>
+          <p>Software a la medida: apps, paneles e integraciones. Un microservicio mío soportó 900 usuarios simultáneos, y hoy construyo Fresko, una plataforma con cuatro niveles de acceso y datos separados por conjunto. <a href="/servicios/software-a-la-medida/">Ver cómo trabajo el software</a>.</p>
+        </li>
+        <li>
+          <h3>Quieres integrar IA sin experimentos</h3>
+          <p>En <a href="https://investors.upwork.com/news-releases/news-release-details/upworks-demand-skills-2026-demand-top-ai-skills-more-doubles-ai" rel="noopener">Upwork</a>, la demanda por integrar IA en software creció 178% en el último año medido. Conecto WhatsApp, n8n y modelos de IA con tus datos, con tope de uso y salida a una persona.</p>
         </li>
       </ul>
+      <p class="problem-close"><strong>¿Tu problema no está en la lista?</strong> Cuéntamelo. En la primera conversación te digo si puedo resolverlo, cómo y cuánto, o si no soy la persona indicada y quién sí.</p>
     </div>
   </section>
 
   <section id="servicios">
     <div class="wrap">
-      <h2>Del sitio simple al software a la medida, con IA como siguiente paso</h2>
+      <h2>Elige el tamaño de tu solución</h2>
       <p class="lede">Empiezas por lo que tu negocio necesita hoy. Todo se puede ampliar después sin rehacer nada.</p>
       <div class="tier-list">
         {tiers.map((t) => (
@@ -120,7 +138,7 @@ const schema = [
 
   <section class="sec-alt" id="casos">
     <div class="wrap">
-      <h2>Casos: problema, decisión y qué quedó</h2>
+      <h2>Casos: el problema, lo que hice y el resultado</h2>
 
       <article class="case">
         <div>
@@ -243,6 +261,7 @@ const schema = [
     <div class="wrap">
       <h2>Lo que suelen preguntar antes de contratar</h2>
       <div class="faq">
+        <details><summary>¿Y si lo que necesito no es una página web?</summary><p>Cuéntamelo. Resuelvo tiendas, asistentes de WhatsApp con IA, paneles, integraciones y software a la medida. En la primera conversación te digo si puedo hacerlo, cómo, cuánto y en cuánto tiempo; si no soy la persona indicada, te lo digo también.</p></details>
         <details><summary>¿Por qué no usar una plantilla de 200 dólares?</summary><p>Puedes hacerlo si solo necesitas existir en internet. Mis sitios están hechos para que te encuentren en tu ciudad y para que cada visita termine en una conversación de WhatsApp contigo. Eso se diseña desde el primer día.</p></details>
         <details><summary>¿De quién es el sitio cuando termine?</summary><p>Tuyo. El dominio, las cuentas y el código quedan a tu nombre, y lo dejamos escrito en la propuesta.</p></details>
         <details><summary>¿Y si la IA le dice algo incorrecto a mi cliente?</summary><p>El asistente solo responde con la información que tú le das, tiene un tope de mensajes por día y, cuando no sabe o el cliente lo pide, avisa a una persona. Revisas las conversaciones en un reporte semanal.</p></details>
@@ -266,11 +285,11 @@ const schema = [
   <section class="sec-alt" id="sobre-mi">
     <div class="wrap about">
       <div>
-        <h2>Quién va a hacer tu proyecto</h2>
+        <h2>Quién se hace responsable de tu resultado</h2>
         <p class="ui" style="margin-top:1.2rem"><a class="btn btn-ghost" href="/CV_JeanCardozo.pdf" download>Descargar mi CV (PDF)</a></p>
       </div>
       <div>
-        <p>Soy desarrollador full-stack. Trabajo con React, Next.js, Astro, Node, TypeScript y Supabase, y conecto WhatsApp con IA usando n8n.</p>
+        <p>Soy desarrollador full-stack y me hago responsable del resultado, no solo de la entrega: por eso te muestro números medidos y casos reales. Trabajo con React, Next.js, Astro, Node, TypeScript y Supabase, y conecto WhatsApp con IA usando n8n.</p>
         <p>Antes trabajé en una distribuidora ferretera con más de 100 aliados y en TurriSystem, donde desarrollé un microservicio que soportó 900 usuarios al tiempo. Hoy construyo Fresko con mi socio en NativaSoft y atiendo proyectos propios de sitios y asistentes.</p>
         <p>Estudio Ingeniería de Sistemas y aprendo cada semana. Si tu proyecto necesita algo que todavía no he hecho, te lo digo desde la primera llamada.</p>
         <div class="recruit">
@@ -290,8 +309,8 @@ const schema = [
 
   <section class="cta-final">
     <div class="wrap">
-      <h2>Cuéntame qué necesita tu negocio</h2>
-      <p class="lede">Respondo por WhatsApp. La primera conversación y el diagnóstico no tienen costo.</p>
+      <h2>Cuéntame qué problema quieres resolver</h2>
+      <p class="lede">Respondo por WhatsApp. En la primera conversación te digo si puedo resolverlo, cómo y cuánto, sin costo.</p>
       <div class="hero-cta">
         <a class="btn btn-gold" href={waLink('Hola Jean, vi tu portafolio y quiero hablar de mi proyecto.')} data-track="wa_final">Escribirme por WhatsApp</a>
         <a class="btn btn-ghost" href={waLink('Hola Jean, quiero la revisión gratuita de mi ficha de Google y mi presencia en línea. Mi negocio es:')} data-track="wa_review">Revisión gratis de tu ficha de Google</a>
