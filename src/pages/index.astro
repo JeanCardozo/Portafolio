@@ -113,7 +113,7 @@ const schema = [
       <ul class="svc-links ui">
         {services.map((x) => <li><a href={`/servicios/${x.slug}/`}>{x.name}: detalle, preguntas y precios</a></li>)}
       </ul>
-      <p class="fx ui">Pesos calculados con la TRM del {trm.date}: {usd(trm.cop)} COP por dólar. Pagas en pesos al cambio del día.</p>
+      <p class="fx ui">Pesos calculados con la TRM oficial del Banco de la República vigente desde el {trm.date}: {usd(trm.cop)} COP por dólar. Pagas en pesos al cambio del día.</p>
       <div class="ladder">Cada sitio se entrega con una idea de <strong>siguiente paso</strong>: primero te encuentran, después te atienden solos por WhatsApp, y un plan mensual lo mantiene funcionando.</div>
     </div>
   </section>
