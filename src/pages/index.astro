@@ -57,7 +57,7 @@ const schema = [
           <a class="btn btn-gold" href={waLink(`Hola Jean, quiero el ${offer.name.toLowerCase()} por $${copFmt} COP en ${offer.days} días hábiles. Mi negocio es:`)} data-track="wa_hero">Quiero mi sitio por WhatsApp</a>
           <a class="btn btn-ghost" href="#casos">Ver trabajos reales</a>
         </div>
-        <p class="who">Soy Jean Cardozo, desarrollador full-stack en Ibagué. Trabajo con clientes en toda Colombia y de forma remota. Para tienda en línea, asistente de IA o software a la medida, <a href="#cotizador">calcula tu presupuesto</a>.</p>
+        <p class="who">Soy Jean Cardozo, desarrollador full-stack en Ibagué: reunión presencial en la ciudad o por videollamada para el resto de Colombia. Para tienda en línea, asistente de IA o software a la medida, <a href="#cotizador">calcula tu presupuesto</a>.</p>
         <ul class="hero-proof ui" aria-label="Por qué confiar">
           <li><b>50+</b> clientes nuevos en las primeras semanas de dos negocios de Ibagué (<a href="/casos/tecnicenter/">Tecni Center</a> y <a href="/casos/la-tertulia/">La Tertulia</a>)</li>
           <li><b>Todo a tu nombre:</b> dominio, cuentas y código, con 30 días de garantía (<a href="/como-trabajo/">cómo trabajo</a>)</li>
@@ -106,7 +106,7 @@ const schema = [
         <div class="tier">
           <h3>Asistente de WhatsApp con IA</h3>
           <p>Responde preguntas frecuentes, toma pedidos o citas, recuerda a quien no confirmó y avisa a una persona cuando el caso lo requiere.</p>
-          <div class="price">USD {usd(addons[1].from)} a {usd(addons[1].to)}<small>más USD {agentMonthly.from} a {agentMonthly.to} al mes según uso · 1 a 2 semanas</small></div>
+          <div class="price">USD {usd(addons[1].from)} a {usd(addons[1].to)}<small>más USD {agentMonthly.from} a {agentMonthly.to} al mes según uso · 1 a 2 semanas · <a href="/servicios/asistente-whatsapp-ia/">ver demo</a></small></div>
         </div>
       </div>
       <p class="fx ui">Para agencias y equipos que necesitan refuerzo: desarrollo full-stack por horas, USD {hourly.from} a {hourly.to}.</p>
@@ -294,6 +294,7 @@ const schema = [
       <p class="lede">Respondo por WhatsApp. La primera conversación y el diagnóstico no tienen costo.</p>
       <div class="hero-cta">
         <a class="btn btn-gold" href={waLink('Hola Jean, vi tu portafolio y quiero hablar de mi proyecto.')} data-track="wa_final">Escribirme por WhatsApp</a>
+        <a class="btn btn-ghost" href={waLink('Hola Jean, quiero la revisión gratuita de mi ficha de Google y mi presencia en línea. Mi negocio es:')} data-track="wa_review">Revisión gratis de tu ficha de Google</a>
         <a class="btn btn-ghost" href={`mailto:${site.email}`}>Escribir por correo</a>
       </div>
     </div>

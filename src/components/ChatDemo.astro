@@ -1,0 +1,35 @@
+---
+// Scripted simulation: no model, no network, no data collected. It shows what the real assistant does with a business's own information.
+---
+<section class="chat-demo" aria-labelledby="demo-title">
+  <h2 id="demo-title">Mira cómo atiende un asistente</h2>
+  <p class="ui note">Simulación con respuestas de ejemplo para una panadería ficticia. El asistente real responde con la información de tu negocio.</p>
+  <div class="phone" role="region" aria-label="Conversación de ejemplo">
+    <div class="phone-bar ui">Panadería La Esquina (ejemplo)</div>
+    <div class="msgs" id="demo-msgs" aria-live="polite" tabindex="0" role="log" aria-label="Mensajes de la conversación">
+      <div class="msg bot">¡Hola! Soy el asistente de la panadería. ¿En qué te ayudo?</div>
+    </div>
+    <div class="quick ui" id="demo-quick">
+      <button type="button" data-q="horario">¿Qué horario tienen?</button>
+      <button type="button" data-q="precio">¿Cuánto cuesta una torta de 20 porciones?</button>
+      <button type="button" data-q="pedido">Quiero un pedido para mañana</button>
+      <button type="button" data-q="persona">Quiero hablar con una persona</button>
+    </div>
+  </div>
+</section>
+<script>
+  const A: Record<string, [string, string]> = {
+    horario: ['¿Qué horario tienen?', 'Atendemos de lunes a sábado de 6:00 a. m. a 7:00 p. m. y domingos de 7:00 a. m. a 1:00 p. m.'],
+    precio: ['¿Cuánto cuesta una torta de 20 porciones?', 'La torta de 20 porciones cuesta $95.000. Hay sabores de vainilla, chocolate y zanahoria. ¿Quieres hacer el pedido?'],
+    pedido: ['Quiero un pedido para mañana', 'Claro. Dime qué productos quieres, la hora de recogida y a nombre de quién lo dejo. Con esos datos queda registrado y te lo confirmo.'],
+    persona: ['Quiero hablar con una persona', 'Listo, te paso con alguien del equipo. Le dejé tu conversación para que no tengas que repetir nada.'],
+  };
+  const box = document.getElementById('demo-msgs')!;
+  const add = (cls: string, text: string) => { const d = document.createElement('div'); d.className = `msg ${cls}`; d.textContent = text; box.appendChild(d); box.scrollTop = box.scrollHeight; };
+  document.getElementById('demo-quick')!.addEventListener('click', (e) => {
+    const k = (e.target as HTMLElement).closest('button')?.dataset.q;
+    if (!k || !A[k]) return;
+    add('me', A[k][0]);
+    setTimeout(() => add('bot', A[k][1]), 450);
+  });
+</script>
