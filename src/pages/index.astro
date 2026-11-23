@@ -2,50 +2,72 @@
 import Base from '../layouts/Base.astro';
 import { site, tiers, addons, care, agentMonthly, hourly, trm, waLink, offer } from '../data/site';
 import { services } from '../data/services';
+import { ids, personNode } from '../data/schema';
 
 const usd = (n: number) => n.toLocaleString('es-CO');
 const weeks = (d: [number, number]) => (d[1] <= 15 ? `${d[0]} a ${d[1]} días hábiles` : `${Math.round(d[0] / 5)} a ${Math.round(d[1] / 5)} semanas`);
 const copFmt = offer.cop.toLocaleString('es-CO');
 const title = 'Páginas web, software y asistentes de WhatsApp con IA · JeanCRG';
 const description = 'Desarrollador full-stack en Ibagué: páginas web con SEO local, tiendas, software a la medida y asistentes de WhatsApp con IA. Cotiza en 30 segundos.';
+const base = Astro.site!.href.replace(/\/$/, '');
 const schema = [
   {
     '@context': 'https://schema.org',
-    '@type': 'ProfessionalService',
-    name: `${site.brand} · ${site.name}`,
-    description,
-    areaServed: 'CO',
-    address: { '@type': 'PostalAddress', addressLocality: 'Ibagué', addressRegion: 'Tolima', addressCountry: 'CO' },
-    founder: { '@type': 'Person', name: 'Jean Cardozo Ramírez', sameAs: [site.linkedin, site.github, site.youtube] },
-    knowsAbout: ['Desarrollo web', 'SEO local', 'Tiendas en línea', 'Software a la medida', 'WhatsApp Business API', 'Automatización con n8n', 'React', 'TypeScript', 'Supabase'],
-    hasOfferCatalog: {
-      '@type': 'OfferCatalog',
-      name: 'Servicios',
-      itemListElement: services.map((x) => ({
-        '@type': 'Offer',
-        priceCurrency: 'USD',
-        price: x.from,
-        itemOffered: { '@type': 'Service', name: x.name, url: `${Astro.site!.href}servicios/${x.slug}/` },
-      })),
-    },
+    '@graph': [
+      personNode(base),
+      {
+        '@type': 'ProfessionalService',
+        '@id': ids(base).org,
+        name: `${site.brand} · ${site.name}`,
+        description,
+        url: base,
+        logo: `${base}/icon-512.png`,
+        image: `${base}/og.png`,
+        telephone: `+${site.phone}`,
+        email: site.email,
+        priceRange: 'USD 280 – 9.000',
+        areaServed: [{ '@type': 'Country', name: 'Colombia' }, { '@type': 'City', name: 'Ibagué' }],
+        address: { '@type': 'PostalAddress', addressLocality: 'Ibagué', addressRegion: 'Tolima', addressCountry: 'CO' },
+        founder: { '@id': ids(base).person },
+        sameAs: [site.linkedin, site.github, site.youtube],
+        knowsAbout: ['Desarrollo web', 'SEO local', 'Tiendas en línea', 'Software a la medida', 'WhatsApp Business API', 'Automatización con n8n'],
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: 'Servicios',
+          itemListElement: services.map((x) => ({
+            '@type': 'Offer',
+            priceCurrency: 'USD',
+            price: x.from,
+            itemOffered: { '@type': 'Service', name: x.name, url: `${base}/servicios/${x.slug}/` },
+          })),
+        },
+      },
+      { '@type': 'WebSite', '@id': ids(base).site, name: `${site.brand} · ${site.name}`, url: base, inLanguage: 'es-CO', publisher: { '@id': ids(base).org } },
+    ],
   },
-  { '@context': 'https://schema.org', '@type': 'WebSite', name: `${site.brand} · ${site.name}`, url: Astro.site!.href, inLanguage: 'es-CO' },
 ];
 ---
 <Base title={title} description={description} schema={schema}>
   <section class="hero hero-dark">
-    <div class="wrap hero-grid" style="grid-template-columns:1fr">
-      <div style="max-width:52rem">
+    <div class="wrap hero-grid">
+      <div>
         <h1>{offer.name}: ${copFmt} COP, listo en {offer.days} días hábiles.</h1>
         <p class="lede">Una página rápida con SEO local que lleva a quien te busca en Google directo a tu WhatsApp. Precio cerrado, sin sorpresas: {offer.upfront}% para empezar y {100 - offer.upfront}% al entregar. El plazo cuenta desde que tengo tus textos, fotos y el anticipo.</p>
         <div class="hero-cta">
           <a class="btn btn-gold" href={waLink(`Hola Jean, quiero el ${offer.name.toLowerCase()} por $${copFmt} COP en ${offer.days} días hábiles. Mi negocio es:`)} data-track="wa_hero">Quiero mi sitio por WhatsApp</a>
+          <a class="btn btn-ghost" href="#casos">Ver trabajos reales</a>
         </div>
         <p class="who">Soy Jean Cardozo, desarrollador full-stack en Ibagué. Trabajo con clientes en toda Colombia y de forma remota. Para tienda en línea, asistente de IA o software a la medida, <a href="#cotizador">calcula tu presupuesto</a>.</p>
-        <ul class="hero-proof ui" aria-label="Resultados">
-          <li><b>50+</b> clientes nuevos en las primeras semanas de dos negocios de Ibagué (<a href="#casos">ver casos</a>)</li>
+        <ul class="hero-proof ui" aria-label="Por qué confiar">
+          <li><b>50+</b> clientes nuevos en las primeras semanas de dos negocios de Ibagué (<a href="/casos/tecnicenter/">Tecni Center</a> y <a href="/casos/la-tertulia/">La Tertulia</a>)</li>
+          <li><b>Todo a tu nombre:</b> dominio, cuentas y código, con 30 días de garantía (<a href="/como-trabajo/">cómo trabajo</a>)</li>
+          <li><b>Lighthouse 98 y 97</b> de rendimiento en esos dos sitios, medido el 23 de nov de 2026</li>
         </ul>
       </div>
+      <figure class="hero-shots" aria-label="Sitios publicados">
+        <a href="/casos/tecnicenter/"><img src="/casos/tecnicenter-desktop.jpg" width="1280" height="800" alt="Sitio de Tecni Center, taller de TV en Ibagué" loading="lazy" /></a>
+        <a href="/casos/la-tertulia/"><img src="/casos/tertulia-desktop.jpg" width="1280" height="800" alt="Sitio de La Tertulia Café, panadería en Ibagué" loading="lazy" /></a>
+      </figure>
     </div>
   </section>
 
@@ -55,11 +77,11 @@ const schema = [
       <ul class="demand">
         <li>
           <h3>Tiendas en línea</h3>
-          <p>El comercio electrónico en Colombia creció 22,2% en número de transacciones en el primer trimestre de 2026, según la Cámara Colombiana de Comercio Electrónico. Hago tiendas con carrito, pedido por WhatsApp y pagos locales.</p>
+          <p>El comercio electrónico en Colombia creció 22,2% en número de transacciones en el primer trimestre de 2026, según la <a href="https://ccce.org.co/" rel="noopener">Cámara Colombiana de Comercio Electrónico</a>. Hago tiendas con carrito, pedido por WhatsApp y pagos locales.</p>
         </li>
         <li>
           <h3>Integración de IA en el negocio</h3>
-          <p>En Upwork, la demanda por integrar IA en software creció 178% y la de chatbots 71% en el último año medido. Conecto WhatsApp, n8n y modelos de IA con tus datos y siempre dejo una salida a una persona.</p>
+          <p>En <a href="https://investors.upwork.com/news-releases/news-release-details/upworks-demand-skills-2026-demand-top-ai-skills-more-doubles-ai" rel="noopener">Upwork</a>, la demanda por integrar IA en software creció 178% y la de chatbots 71% en el último año medido. Conecto WhatsApp, n8n y modelos de IA con tus datos y siempre dejo una salida a una persona.</p>
         </li>
         <li>
           <h3>SEO local</h3>
@@ -106,7 +128,7 @@ const schema = [
           <h3>Tecni Center</h3>
           <p>Taller de reparación de TV y sonido en Ibagué.</p>
           <div class="tags"><span>Astro</span><span>SEO local</span><span>JSON-LD</span><span>WhatsApp</span></div>
-          <p style="margin-top:1.2rem"><a class="ui" href="https://tecnicenter.netlify.app" rel="noopener">Ver el sitio</a> · <a class="ui" href="https://github.com/JeanCardozo/TecniCenter" rel="noopener">Ver el código</a></p>
+          <p style="margin-top:1.2rem"><a class="ui" href="/casos/tecnicenter/">Leer el caso completo</a> · <a class="ui" href="https://tecnicenter.netlify.app" rel="noopener">Ver el sitio</a> · <a class="ui" href="https://github.com/JeanCardozo/TecniCenter" rel="noopener">Ver el código</a></p>
         </div>
         <div>
           <figure class="shot">
@@ -127,7 +149,7 @@ const schema = [
           <h3>La Tertulia Café</h3>
           <p>Café y panadería en Ibagué con pedidos por WhatsApp.</p>
           <div class="tags"><span>Next.js</span><span>Supabase</span><span>Panel de administración</span><span>SEO local</span></div>
-          <p style="margin-top:1.2rem"><a class="ui" href="https://la-tertulia-cafe.vercel.app" rel="noopener">Ver el sitio</a></p>
+          <p style="margin-top:1.2rem"><a class="ui" href="/casos/la-tertulia/">Leer el caso completo</a> · <a class="ui" href="https://la-tertulia-cafe.vercel.app" rel="noopener">Ver el sitio</a></p>
         </div>
         <div>
           <figure class="shot">
@@ -227,6 +249,17 @@ const schema = [
         <details><summary>¿Cuánto tarda?</summary><p>Un sitio simple, de 5 a 8 días hábiles. Uno corporativo, de 2 a 3 semanas. Una tienda, de 3 a 5; uno sofisticado, de 5 a 8, y el software a la medida, de 6 a 12 según alcance. El plazo empieza cuando tengo tus textos, fotos y el anticipo. Te doy la fecha por escrito antes de empezar.</p></details>
         <details><summary>¿Cómo se paga?</summary><p>La mitad para empezar y la otra mitad al entregar. Nada de contratos largos. Si trabajas en pesos, se liquida al cambio del día del pago.</p></details>
       </div>
+    </div>
+  </section>
+
+  <section id="guias">
+    <div class="wrap">
+      <h2>Guías para decidir con datos</h2>
+      <ul class="guide-links">
+        <li><a href="/guias/cuanto-cuesta-una-pagina-web-en-colombia/">¿Cuánto cuesta una página web en Colombia en 2026?</a><span>Precios de cinco fuentes públicas, plazos y cómo comparar cotizaciones.</span></li>
+        <li><a href="/guias/asistente-whatsapp-ia-para-negocios-colombia/">Asistente de WhatsApp con IA: costos y reglas</a><span>Qué permite Meta desde enero de 2026, cuánto cuesta y qué leyes aplican.</span></li>
+        <li><a href="/como-trabajo/">Cómo trabajo y cómo protejo tu proyecto</a><span>Proceso, pagos, garantía y medidas de seguridad.</span></li>
+      </ul>
     </div>
   </section>
 

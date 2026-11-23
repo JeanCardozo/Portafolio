@@ -229,3 +229,11 @@ section { padding-block: clamp(3.5rem, 8vw, 6.5rem); }
 .guide-links { list-style: none; margin: 1.2rem 0 0; padding: 0; display: grid; gap: .8rem; }
 .guide-links a { font: 600 1.05rem var(--f-ui); }
 .guide-links span { display: block; font: .9rem/1.5 var(--f-ui); color: var(--slate); margin-top: .15rem; }
+
+/* v5: hero proof shots */
+.hero-shots { margin: 0; position: relative; display: none; }
+.hero-shots a { display: block; }
+.hero-shots img { width: 100%; height: auto; display: block; border-radius: 6px; border: 1px solid #3a362a; box-shadow: 8px 8px 0 var(--gold); background: #fff; }
+.hero-shots a + a { width: 78%; margin: -3.2rem 0 0 auto; position: relative; }
+.hero-shots a + a img { box-shadow: 8px 8px 0 #f1ede2; }
+@media (min-width: 901px) { .hero-shots { display: block; padding-bottom: 2rem; } }
