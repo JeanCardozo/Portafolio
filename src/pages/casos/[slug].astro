@@ -1,0 +1,52 @@
+---
+import Doc from '../../layouts/Doc.astro';
+import { cases } from '../../data/cases';
+import { articleSchema, breadcrumbSchema } from '../../data/schema';
+
+export function getStaticPaths() {
+  return cases.map((c) => ({ params: { slug: c.slug }, props: { c } }));
+}
+const { c } = Astro.props;
+const base = Astro.site!.href.replace(/\/$/, '');
+const path = `/casos/${c.slug}/`;
+const title = `${c.name}: caso de estudio de sitio web con SEO local · Jean Cardozo`;
+const schema = [
+  articleSchema(base, { headline: `${c.name}: caso de estudio`, description: c.description, path, published: '2026-11-23', modified: '2026-11-23' }),
+  breadcrumbSchema(base, [{ name: 'Casos', path: '/#casos' }, { name: c.name, path }]),
+];
+const lh = c.lighthouse;
+---
+<Doc title={title} description={c.description} h1={`${c.name}: de una ficha de Google a un sitio que lleva clientes a WhatsApp`} crumb="Casos" updated="2026-11-23" schema={schema} cta={`Hola Jean, vi el caso de ${c.name} y quiero algo parecido para mi negocio.`}>
+  <div class="answer">
+    <p><strong>El negocio:</strong> {c.business}. <strong>El resultado:</strong> sitio en línea con SEO local y Lighthouse de {lh.perf}/{lh.a11y}/{lh.bp}/{lh.seo}. Entre este sitio y el de {c.slug === 'tecnicenter' ? 'La Tertulia' : 'Tecni Center'} llegaron más de 50 clientes nuevos en las primeras semanas de operación digital.</p>
+  </div>
+  <figure><img src={c.shot} width="1280" height="800" alt={c.alt} loading="lazy" /></figure>
+  <p class="meta ui"><a href={c.url} rel="noopener">Ver el sitio en vivo</a>{c.repo && <> · <a href={c.repo} rel="noopener">Ver el código</a></>} · Stack: {c.stack.join(', ')}</p>
+
+  <h2>El problema</h2>
+  <p>{c.problem}</p>
+
+  <h2>Las decisiones</h2>
+  <ul>{c.decisions.map((d) => <li>{d}</li>)}</ul>
+
+  <h2>SEO y visibilidad</h2>
+  <ul>{c.seo.map((d) => <li>{d}</li>)}</ul>
+
+  <h2>Seguridad y buenas prácticas</h2>
+  <ul>{c.security.map((d) => <li>{d}</li>)}</ul>
+
+  <h2>Qué se midió</h2>
+  <div class="stats">
+    <div><b>{lh.perf}</b><span>Rendimiento (Lighthouse móvil)</span></div>
+    <div><b>{lh.a11y}</b><span>Accesibilidad</span></div>
+    <div><b>{lh.bp}</b><span>Buenas prácticas</span></div>
+    <div><b>{lh.seo}</b><span>SEO</span></div>
+    <div><b>{lh.lcp}</b><span>Carga del contenido principal</span></div>
+  </div>
+  <p class="note">Medido con Lighthouse el 23 de noviembre de 2026, perfil móvil con limitación simulada. Los puntajes de laboratorio no son datos de usuarios reales. El dato de clientes (más de 50 entre los dos sitios) lo verificó el autor con los dueños.</p>
+
+  <h2>Lo que queda pendiente</h2>
+  <ul>{c.pending.map((d) => <li>{d}</li>)}</ul>
+
+  <p>¿Tu negocio está en la misma situación? Mira cuánto <a href="/guias/cuanto-cuesta-una-pagina-web-en-colombia/">cuesta una página web en Colombia</a> o <a href="/#cotizador">calcula tu presupuesto</a>.</p>
+</Doc>
