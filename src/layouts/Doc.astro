@@ -1,0 +1,21 @@
+---
+import Base from './Base.astro';
+import { waLink } from '../data/site';
+interface Props { title: string; description: string; h1: string; crumb: string; updated: string; schema?: object[]; cta?: string; }
+const { title, description, h1, crumb, updated, schema = [], cta = 'Hola Jean, leí tu guía y quiero cotizar.' } = Astro.props;
+const when = new Date(`${updated}T12:00:00`).toLocaleDateString('es-CO', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<Base title={title} description={description} schema={schema}>
+  <section class="hero">
+    <div class="wrap legal prose">
+      <p class="crumb ui"><a href="/">Inicio</a> / {crumb}</p>
+      <h1>{h1}</h1>
+      <p class="meta ui">Por Jean Cardozo · Actualizado el {when}</p>
+      <slot />
+      <aside class="cta-box ui">
+        <p><strong>¿Quieres que lo hagamos para tu negocio?</strong> Te respondo por WhatsApp con alcance, precio cerrado y fecha por escrito.</p>
+        <a class="btn btn-gold" href={waLink(cta)} data-track="wa_doc">Escribirme por WhatsApp</a>
+      </aside>
+    </div>
+  </section>
+</Base>
