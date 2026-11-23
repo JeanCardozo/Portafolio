@@ -1,0 +1,13 @@
+---
+import Doc from '../../layouts/Doc.astro';
+import { breadcrumbSchema } from '../../data/schema';
+const base = Astro.site!.href.replace(/\/$/, '');
+const schema = [breadcrumbSchema(base, [{ name: 'Guías', path: '/guias/' }])];
+---
+<Doc title="Guías para negocios: páginas web y WhatsApp con IA · JeanCRG" description="Guías con datos y fuentes para decidir sobre tu página web y tu asistente de WhatsApp con IA en Colombia." h1="Guías para decidir con datos" crumb="Guías" updated="2026-11-23" schema={schema}>
+  <p>Guías cortas, con cifras de fuentes públicas citadas, para negocios colombianos que están comparando opciones.</p>
+  <ul class="guide-links">
+    <li><a href="/guias/cuanto-cuesta-una-pagina-web-en-colombia/">¿Cuánto cuesta una página web en Colombia en 2026?</a><span>Precios de cinco fuentes, plazos y cómo comparar cotizaciones.</span></li>
+    <li><a href="/guias/asistente-whatsapp-ia-para-negocios-colombia/">Asistente de WhatsApp con IA: costos y reglas</a><span>Qué permite Meta desde 2026, cuánto cuesta y qué leyes aplican.</span></li>
+  </ul>
+</Doc>

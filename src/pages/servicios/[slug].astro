@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import ChatDemo from '../../components/ChatDemo.astro';
 import { services } from '../../data/services';
 import { site, waLink } from '../../data/site';
 
@@ -48,6 +49,12 @@ const schema = [
       <p class="who ui">Desde USD {usd(s.from)} · {s.timeline}</p>
     </div>
   </section>
+
+  {s.slug === 'asistente-whatsapp-ia' && (
+    <section>
+      <div class="wrap"><ChatDemo /></div>
+    </section>
+  )}
 
   <section class="sec-alt">
     <div class="wrap about">

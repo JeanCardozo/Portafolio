@@ -1,3 +1,5 @@
+import trmData from './trm.json';
+
 // Single source for contact data and prices. Prices are USD references; see content/pricing.md for the market basis.
 export const site = {
   name: 'Jean Cardozo',
@@ -21,8 +23,11 @@ export const legal = {
   updated: '27 de octubre de 2026',
 };
 
-// TRM on 2026-10-27 (dolar-colombia.com / Banco de la República). Update when quoting.
-export const trm = { cop: 3462, date: '23 nov 2026' };
+// Official TRM (Banco de la República). src/data/trm.json is refreshed by scripts/update-trm.mjs before every build.
+export const trm = {
+  cop: trmData.cop,
+  date: new Date(`${trmData.date}T12:00:00Z`).toLocaleDateString('es-CO', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).replace(/\./g, ''),
+};
 
 // days = business days [min, max]
 export type Tier = { id: string; name: string; from: number; to: number; days: [number, number]; note: string };

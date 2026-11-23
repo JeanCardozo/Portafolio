@@ -1,0 +1,50 @@
+name: Deploy
+
+# Deploys on every push to main and once a day, so prices follow the official TRM without manual work.
+# Needs the NETLIFY_AUTH_TOKEN secret and the NETLIFY_SITE_ID variable; without the token the job exits cleanly.
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "10 11 * * *" # 06:10 in Bogota (UTC-5)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: production
+    env:
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID }}
+      SITE_URL: https://jeancrg.netlify.app
+    steps:
+      - name: Check deploy credentials
+        id: creds
+        run: |
+          if [ -z "$NETLIFY_AUTH_TOKEN" ] || [ -z "$NETLIFY_SITE_ID" ]; then echo "ok=false" >> "$GITHUB_OUTPUT"; echo "::notice::Deploy skipped: NETLIFY_AUTH_TOKEN or NETLIFY_SITE_ID is not set."; else echo "ok=true" >> "$GITHUB_OUTPUT"; fi
+      - if: steps.creds.outputs.ok == 'true'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - if: steps.creds.outputs.ok == 'true'
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: npm
+      - if: steps.creds.outputs.ok == 'true'
+        run: npm ci --ignore-scripts
+      - if: steps.creds.outputs.ok == 'true'
+        run: npm test
+      - if: steps.creds.outputs.ok == 'true'
+        run: npm run build
+      - if: steps.creds.outputs.ok == 'true'
+        run: npx --yes netlify-cli@27.20.1 deploy --prod --dir=dist --no-build

@@ -1,0 +1,54 @@
+---
+import Doc from '../layouts/Doc.astro';
+import { breadcrumbSchema } from '../data/schema';
+const base = Astro.site!.href.replace(/\/$/, '');
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'WebPage', name: 'Cómo trabajo y cómo protejo tu proyecto', url: `${base}/como-trabajo/`, inLanguage: 'es-CO', author: { '@id': `${base}/#jean` } },
+  breadcrumbSchema(base, [{ name: 'Cómo trabajo', path: '/como-trabajo/' }]),
+];
+---
+<Doc title="Cómo trabajo y cómo protejo tu proyecto · Jean Cardozo" description="Proceso, pagos, garantía y seguridad con los que desarrollo sitios y asistentes de WhatsApp con IA: precio cerrado, accesos mínimos y todo a tu nombre." h1="Cómo trabajo y cómo protejo tu proyecto" crumb="Cómo trabajo" updated="2026-11-23" schema={schema} cta="Hola Jean, leí cómo trabajas y quiero hablar de mi proyecto.">
+  <div class="answer">
+    <p><strong>En una frase:</strong> precio cerrado y por escrito, 50% para empezar y 50% al entregar, todo a tu nombre al terminar, 30 días para corregir errores sin costo y accesos con el menor privilegio posible.</p>
+  </div>
+
+  <h2>El proceso, paso a paso</h2>
+  <ol>
+    <li><strong>Conversación inicial (sin costo).</strong> Entiendo tu negocio y qué tiene que lograr el sitio o el asistente.</li>
+    <li><strong>Propuesta por escrito.</strong> Alcance, precio cerrado, fecha de entrega y qué no incluye. No empiezo sin tu aceptación escrita.</li>
+    <li><strong>Anticipo del 50%.</strong> El plazo cuenta desde que tengo el anticipo, tus textos y tus fotos.</li>
+    <li><strong>Construcción con avances.</strong> Te muestro el trabajo antes del final para ajustar a tiempo.</li>
+    <li><strong>Entrega y 50% restante.</strong> Dominio, cuentas y código a tu nombre, y una explicación de cómo editarlo.</li>
+  </ol>
+
+  <h2>Qué recibes</h2>
+  <ul>
+    <li>El sitio o asistente funcionando, con SEO técnico, velocidad y accesibilidad cuidadas.</li>
+    <li>Dominio, cuentas y código a tu nombre; el código queda en un repositorio con historial de cambios.</li>
+    <li>Garantía de 30 días para corregir sin costo los errores de funcionamiento.</li>
+    <li>Un plan mensual opcional de cuidado (hosting, cambios pequeños y monitoreo) si no quieres ocuparte de nada.</li>
+  </ul>
+
+  <h2>Cómo cuido tu proyecto y tus datos</h2>
+  <ul>
+    <li><strong>Accesos mínimos.</strong> Te pido solo los accesos que necesito, por invitación o con permisos limitados, nunca contraseñas por chat, y los retiro al terminar.</li>
+    <li><strong>Datos de tus clientes.</strong> Si el proyecto los trata, tú eres el responsable y yo el encargado: los uso solo por tu cuenta, guardo confidencialidad y los elimino o te los devuelvo al terminar (Ley 1581 de 2012). Lo dejo escrito en el contrato.</li>
+    <li><strong>Sitios sin rastros innecesarios.</strong> Mis sitios no usan cookies de seguimiento por defecto; si activas analítica, se pide consentimiento antes.</li>
+    <li><strong>Asistentes de IA con límites.</strong> Responden solo con la información que tú entregas, tienen un tope de mensajes por día, verifican la firma de cada mensaje que llega de Meta, separan los datos de cada negocio y pasan a una persona cuando hace falta.</li>
+    <li><strong>Seguridad por defecto.</strong> Cabeceras de seguridad (CSP, HSTS), validación de entradas, reglas de acceso por fila en la base de datos y dependencias actualizadas.</li>
+  </ul>
+
+  <h2>Pagos</h2>
+  <p>50% al empezar y 50% al entregar, sin contratos largos. Los precios se publican en dólares y se liquidan en pesos colombianos a la TRM del día del pago, salvo que acordemos otra cosa por escrito. Servicios de terceros como dominio, hosting, WhatsApp (Meta) o proveedores de IA se pagan directamente a ellos, a tu nombre.</p>
+
+  <h2>Lo que no hago</h2>
+  <ul>
+    <li>No prometo posiciones en Google, ventas ni cantidad de clientes: dependen de factores que no controlo. Sí aplico SEO técnico y local, y te digo con honestidad qué esperar.</li>
+    <li>No copio plantillas ajenas ni vendo ni cedo tus datos.</li>
+    <li>No te dejo atado: si un día quieres trabajar con otra persona, el código, el dominio y las cuentas ya son tuyos.</li>
+  </ul>
+
+  <h2>Seguridad de este sitio y de su código</h2>
+  <p>El código de este portafolio es público en <a href="https://github.com/JeanCardozo/Portafolio" rel="noopener">GitHub</a> y está protegido con análisis de secretos, alertas de dependencias, CodeQL, rama principal protegida y acciones fijadas por versión. Si encuentras un problema, la política está en <a href="https://github.com/JeanCardozo/Portafolio/blob/main/SECURITY.md" rel="noopener">SECURITY.md</a> y en <a href="/.well-known/security.txt">security.txt</a>.</p>
+  <p class="note">Leyes y términos: <a href="/privacidad/">tratamiento de datos</a>, <a href="/terminos/">términos y condiciones</a> y <a href="/cookies/">cookies</a>.</p>
+</Doc>
