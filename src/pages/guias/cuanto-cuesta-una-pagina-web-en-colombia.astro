@@ -1,0 +1,84 @@
+---
+import Doc from '../../layouts/Doc.astro';
+import { offer } from '../../data/site';
+import { articleSchema, breadcrumbSchema, faqSchema } from '../../data/schema';
+
+const base = Astro.site!.href.replace(/\/$/, '');
+const path = '/guias/cuanto-cuesta-una-pagina-web-en-colombia/';
+const cop = offer.cop.toLocaleString('es-CO');
+const title = '¿Cuánto cuesta una página web en Colombia en 2026? Precios por fuente';
+const description = 'Precios de páginas web en Colombia en 2026 según cinco fuentes públicas: landing desde 500.000 COP, corporativa de 1 a 6 millones y tienda de 1,8 a 12 millones. Plazos y cómo comparar.';
+const faqs = [
+  { q: '¿Cuánto cuesta una página web en Colombia en 2026?', a: 'Según las cinco fuentes públicas que revisé, una landing o web básica cuesta entre 500.000 y 2.500.000 pesos, una web corporativa entre 1.000.000 y 6.000.000 y una tienda en línea entre 1.800.000 y 12.000.000. Los precios publicados por agencias de Ibagué parten de 400.000 a 650.000 pesos para una landing.' },
+  { q: '¿Por qué hay cotizaciones de 500.000 y de 5.000.000 pesos?', a: 'Porque no incluyen lo mismo. El precio cambia con lo que la web tiene que hacer (recibir mensajes, presentar la empresa o cobrar), el número de páginas propias, el diseño a medida frente a una plantilla, el SEO técnico, las integraciones y quién pone el dominio y el hosting. Compara alcance, no solo el número.' },
+  { q: '¿Cuánto tarda en estar lista una página web?', a: 'Según las fuentes: una landing, de 5 a 15 días hábiles; una web corporativa, de 3 a 6 semanas; una tienda en línea, de 4 a 10 semanas. El plazo corre desde que el cliente entrega textos, fotos y el anticipo.' },
+  { q: '¿Necesito SEO local si tengo una ficha de Google?', a: 'La ficha de Google Business Profile y el sitio se refuerzan entre sí. Google recomienda mantener actualizada la información del negocio en su perfil y asegurarse de que el contenido importante esté en texto y que los datos estructurados coincidan con lo que se ve en la página.' },
+];
+const schema = [
+  articleSchema(base, { headline: title, description, path, published: '2026-11-23', modified: '2026-11-23' }),
+  faqSchema(faqs),
+  breadcrumbSchema(base, [{ name: 'Guías', path: '/guias/' }, { name: 'Cuánto cuesta una página web', path }]),
+];
+---
+<Doc title={`${title} · Jean Cardozo`} description={description} h1="¿Cuánto cuesta una página web en Colombia en 2026?" crumb="Guías" updated="2026-11-23" schema={schema} cta="Hola Jean, leí tu guía de precios de páginas web y quiero cotizar.">
+  <div class="answer">
+    <p><strong>Respuesta corta:</strong> en 2026, una landing o web básica cuesta entre <strong>500.000 y 2.500.000 pesos</strong>, una web corporativa entre <strong>1.000.000 y 6.000.000</strong> y una tienda en línea entre <strong>1.800.000 y 12.000.000</strong>. Son los extremos de cinco fuentes públicas consultadas entre el 30 de septiembre y el 23 de noviembre de 2026.</p>
+  </div>
+
+  <h2>Precios publicados por fuente (pesos colombianos)</h2>
+  <table>
+    <thead><tr><th>Fuente</th><th>Landing o web básica</th><th>Corporativa</th><th>Tienda en línea</th></tr></thead>
+    <tbody>
+      <tr><td><a href="https://marketingcpe.com.co/blog/disenoweb/cuanto-cuesta-hacer-una-pagina-web-en-colombia/" rel="noopener">Marketing CPE</a> (oct 2026)</td><td>680.000 – 2.000.000</td><td>1.000.000 – 5.000.000</td><td>1.800.000 – 7.000.000</td></tr>
+      <tr><td><a href="https://www.laboratorioweb.com.co/cuanto-cuesta-disenar-una-pagina-web-en-bucaramanga-guia-de-precios-2025/" rel="noopener">Labweb</a> (30 sep 2026)</td><td>2.000.000</td><td>5.000.000</td><td>7.000.000</td></tr>
+      <tr><td><a href="https://www.alejandroverjel.com/blog/diseno/cuanto-cuesta-pagina-web-colombia/" rel="noopener">Alejandro Verjel</a> (2026)</td><td>800.000 – 2.500.000</td><td>2.500.000 – 6.000.000</td><td>4.500.000 – 12.000.000 o más</td></tr>
+      <tr><td><a href="https://tunegociowb.co/cuanto-vale-una-pagina-web-en-colombia/" rel="noopener">TuNegocioWB</a> (2026)</td><td>500.000 – 2.500.000</td><td>1.700.000 – 4.000.000</td><td>2.650.000 – 3.950.000</td></tr>
+      <tr><td><a href="https://growlat.org/ciudades/ibague/" rel="noopener">GROWLAT</a> (nov 2026, sin IVA)</td><td>809.000 (micro web)</td><td>1.586.000 (hasta 5 secciones)</td><td>—</td></tr>
+    </tbody>
+  </table>
+  <p class="note">Rango observado = menor y mayor valor de la tabla en cada columna. Son precios publicados por cada empresa, no promedios de mercado auditados.</p>
+
+  <h2>Y en Ibagué</h2>
+  <p>Agencias locales publican <a href="https://tevezmarketing.digital/sitios-web-ibague/" rel="noopener">landing desde 650.000 pesos y un sitio de 6 páginas desde 1.500.000</a>, <a href="https://macgraficas.com/diseno-de-paginas-web-ibague/" rel="noopener">planes desde 650.000 pesos al mes</a> y <a href="https://creacionpaginaswebibague.com/" rel="noopener">sitios básicos desde 400.000</a>. El piso local es más bajo que el nacional; la diferencia suele estar en el SEO, el diseño propio y quién da soporte después.</p>
+
+  <h2>Cuánto tarda cada tipo</h2>
+  <table>
+    <thead><tr><th>Tipo</th><th>Plazo según las fuentes</th></tr></thead>
+    <tbody>
+      <tr><td>Landing</td><td>5 a 10 días hábiles (Alejandro Verjel); 15 días hábiles (Labweb)</td></tr>
+      <tr><td>Corporativa</td><td>3 a 6 semanas (Alejandro Verjel); 30 días hábiles (Labweb)</td></tr>
+      <tr><td>Tienda en línea</td><td>4 a 10 semanas (Alejandro Verjel); 30 a 45 días hábiles (Labweb)</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Qué hace subir o bajar el precio</h2>
+  <ul>
+    <li><strong>Lo que la web tiene que hacer:</strong> recibir mensajes es más simple que cobrar en línea, llevar inventario y calcular envíos.</li>
+    <li><strong>Páginas propias:</strong> cada servicio con su página cuesta más trabajo y también le da a Google algo que mostrar.</li>
+    <li><strong>Diseño propio o plantilla:</strong> una plantilla es más barata y se parece a la de la competencia.</li>
+    <li><strong>SEO técnico y local:</strong> datos estructurados, velocidad, sitemap y textos pensados para búsquedas de tu ciudad.</li>
+    <li><strong>Quién es dueño de todo:</strong> pregunta si el dominio, el hosting y el código quedan a tu nombre y qué se paga cada año.</li>
+  </ul>
+
+  <h2>Cómo comparar dos cotizaciones</h2>
+  <p>Pídele a cada proveedor, por escrito: qué incluye, cuántas páginas, plazo con fecha, qué pasa si no te gusta el resultado, qué pagas después del primer año y qué queda a tu nombre. Dos cotizaciones que no responden lo mismo no se comparan solo por precio.</p>
+
+  <h2>Mi precio, para que lo compares</h2>
+  <p>Mi oferta principal es un sitio de una página con SEO local que lleva a tus clientes directo a tu WhatsApp: <strong>{cop} pesos</strong> (USD {offer.usd} a la TRM del día), listo en {offer.days} días hábiles, 50% para empezar y 50% al entregar. Dominio, cuentas y código quedan a tu nombre y tienes 30 días para pedir correcciones sin costo. Para una tienda, un asistente de WhatsApp con IA o software a la medida, usa el <a href="/#cotizador">cotizador</a>.</p>
+  <p>Dos negocios de Ibagué que ya tienen su sitio: <a href="/casos/tecnicenter/">Tecni Center</a> y <a href="/casos/la-tertulia/">La Tertulia Café</a>.</p>
+
+  <h2>Preguntas frecuentes</h2>
+  <div class="faq">
+    {faqs.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+  </div>
+
+  <h2>Fuentes</h2>
+  <ul class="sources">
+    <li>Marketing CPE, «¿Cuánto cuesta una página web en Colombia? Precios de octubre 2026».</li>
+    <li>Labweb, «¿Cuánto cuesta una página web en Colombia? Precios 2026», actualizado el 30 de septiembre de 2026.</li>
+    <li>Alejandro Verjel, «Cuánto cuesta una página web en Colombia 2026».</li>
+    <li>TuNegocioWB, «¿Cuánto vale una página web en Colombia? Precios reales 2026».</li>
+    <li>GROWLAT, página de Ibagué, consultada el 23 de noviembre de 2026.</li>
+    <li>Google Search Central, «AI features and your website» y «Optimizing your website for generative AI features on Google Search».</li>
+  </ul>
+</Doc>

@@ -1,0 +1,80 @@
+---
+import Doc from '../../layouts/Doc.astro';
+import { addons, agentMonthly, trm } from '../../data/site';
+import { articleSchema, breadcrumbSchema, faqSchema } from '../../data/schema';
+
+const base = Astro.site!.href.replace(/\/$/, '');
+const path = '/guias/asistente-whatsapp-ia-para-negocios-colombia/';
+const a = addons.find((x) => x.id === 'agente')!;
+const M = (usd: number) => (usd * trm.cop / 1e6).toLocaleString('es-CO', { maximumFractionDigits: 1 });
+const title = 'Asistente de WhatsApp con IA para negocios en Colombia: costos y reglas 2026';
+const description = 'Qué es un asistente de WhatsApp con IA, cuánto cuesta en Colombia, qué prohíbe Meta desde enero de 2026 y qué leyes aplican (Ley 1581 y Ley 2300). Con fuentes.';
+const faqs = [
+  { q: '¿Puedo usar ChatGPT directamente en el WhatsApp de mi negocio?', a: 'Un asistente genérico tipo ChatGPT distribuido por la API de WhatsApp Business está prohibido desde el 15 de enero de 2026 según los términos de Meta. Lo permitido es un asistente específico de tu negocio: responde sobre tus productos, pedidos o citas y pasa a una persona cuando hace falta.' },
+  { q: '¿Cuánto cuesta un asistente de WhatsApp con IA en Colombia?', a: 'Entre las referencias públicas: GROWLAT publica 2.233.000 pesos más 159.000 al mes; una guía de agencias de IA ubica los chatbots simples entre 1.500 y 3.500 dólares más 150 a 500 dólares al mes. Mi rango es de 450 a 1.500 dólares de montaje más 60 a 150 dólares al mes según el uso.' },
+  { q: '¿Qué pasa si la IA responde algo incorrecto?', a: 'Por eso el asistente solo responde con información que tú le das, tiene un tope de mensajes por día y avisa a una persona cuando no sabe o el cliente lo pide. Además hay un reporte semanal para revisar las conversaciones.' },
+  { q: '¿Puedo mandar mensajes comerciales a cualquier hora?', a: 'No. La Ley 2300 de 2023 (artículo 5) limita los mensajes publicitarios por aplicaciones de mensajería a lunes a viernes de 7 a. m. a 7 p. m. y sábados de 8 a. m. a 3 p. m., sin domingos ni festivos, y exige una forma fácil de dejar de recibirlos.' },
+  { q: '¿Necesito autorización para guardar los datos de mis clientes?', a: 'Sí. La Ley 1581 de 2012 exige una autorización previa e informada del titular para tratar sus datos y que conserves prueba de ella. En un asistente, la autorización se pide al inicio de la conversación y queda guardada.' },
+];
+const schema = [
+  articleSchema(base, { headline: title, description, path, published: '2026-11-23', modified: '2026-11-23' }),
+  faqSchema(faqs),
+  breadcrumbSchema(base, [{ name: 'Guías', path: '/guias/' }, { name: 'Asistente de WhatsApp con IA', path }]),
+];
+---
+<Doc title={`${title} · Jean Cardozo`} description={description} h1="Asistente de WhatsApp con IA para negocios en Colombia: costos y reglas" crumb="Guías" updated="2026-11-23" schema={schema} cta="Hola Jean, leí tu guía del asistente de WhatsApp con IA y quiero una demo.">
+  <div class="answer">
+    <p><strong>Respuesta corta:</strong> un asistente de WhatsApp con IA responde preguntas frecuentes, toma pedidos o citas y pasa a una persona cuando hace falta. En Colombia se publica desde unos <strong>2,2 millones de pesos más 159.000 al mes</strong> (GROWLAT); el mío va de <strong>USD {a.from} a {a.to.toLocaleString('es-CO')}</strong> (≈ {M(a.from)} a {M(a.to)} millones de pesos a la TRM de hoy) más <strong>USD {agentMonthly.from} a {agentMonthly.to} al mes</strong>. Desde el 15 de enero de 2026 Meta solo permite asistentes específicos de un negocio, no asistentes generales.</p>
+  </div>
+
+  <h2>Por qué importa en Colombia</h2>
+  <div class="stats">
+    <div><b>92,2 %</b><span>de penetración de WhatsApp entre usuarios con smartphone (Workitd)</span></div>
+    <div><b>87 %</b><span>de las mipymes colombianas venden por WhatsApp (Chately)</span></div>
+    <div><b>25 %</b><span>de ellas tiene herramientas de gestión (Chately)</span></div>
+  </div>
+  <p class="note">Cifras de blogs de proveedores del sector: úsalas como orientación, no como estadística oficial.</p>
+
+  <h2>Qué hace y qué no hace</h2>
+  <ul>
+    <li><strong>Sí:</strong> responde horarios, precios y disponibilidad con la información que tú le das; toma datos del cliente; agenda citas; recuerda a quien no confirmó; avisa a una persona; entrega un reporte semanal.</li>
+    <li><strong>No:</strong> inventar información de tu negocio, atender cualquier tema como un ChatGPT abierto, ni mandar publicidad a quien no la pidió.</li>
+  </ul>
+
+  <h2>La regla de Meta (2026)</h2>
+  <p>Los términos de la API de WhatsApp Business prohíben desde el 15 de enero de 2026 que proveedores de IA distribuyan asistentes de propósito general cuando esa tecnología es la funcionalidad principal. Lo que Meta busca permitir es el servicio al cliente de un negocio. Por eso construyo asistentes que atienden solo tu negocio, con tu propia cuenta de WhatsApp Business. Fuentes: <a href="https://developers.facebook.com/documentation/business-messaging/whatsapp/pricing/ai-providers" rel="noopener">documentación de Meta</a> y <a href="https://techcrunch.com/2025/10/18/whatssapp-changes-its-terms-to-bar-general-purpose-chatbots-from-its-platform/" rel="noopener">TechCrunch (18 oct 2025)</a>.</p>
+
+  <h2>Cuánto cuesta (tres capas)</h2>
+  <table>
+    <thead><tr><th>Capa</th><th>Qué es</th><th>Rango público</th></tr></thead>
+    <tbody>
+      <tr><td>Software por mes</td><td>Plataformas que armas tú</td><td>Desde unos 15 a 50 dólares al mes</td></tr>
+      <tr><td>Implementación hecha para ti</td><td>Instalación, entrenamiento con tu información, panel y soporte</td><td>GROWLAT: 2.233.000 pesos + 159.000/mes. Agencias de IA: 1.500–3.500 dólares + 150–500/mes (<a href="https://mintec.co/blog/ai-automation-small-business-revenue/" rel="noopener">Mintec</a>)</td></tr>
+      <tr><td>Costo de Meta y de la IA</td><td>Se paga por uso, aparte de lo anterior</td><td>Una guía local estima 160.000–400.000 pesos al mes de API y plataforma para una pyme (<a href="https://chately.co/blog/crm-whatsapp-colombia" rel="noopener">Chately</a>)</td></tr>
+    </tbody>
+  </table>
+  <p class="note">En la comunidad de n8n se publicó un ejemplo de costo de modelo de unos 4 a 80 dólares por 1.000 conversaciones al mes según el modelo; por eso fijo un tope mensual de uso por cliente.</p>
+
+  <h2>Las leyes que aplican</h2>
+  <ul>
+    <li><strong>Ley 1581 de 2012 y Decreto 1377 de 2013:</strong> autorización previa e informada para tratar datos, prueba de esa autorización, política de tratamiento y canal para consultas y reclamos. Texto: <a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=49981" rel="noopener">Función Pública</a>.</li>
+    <li><strong>Ley 2300 de 2023, artículo 5:</strong> mensajes publicitarios por mensajería solo de lunes a viernes de 7 a. m. a 7 p. m. y sábados de 8 a. m. a 3 p. m., con una forma sencilla de cancelar. Texto: <a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=213990" rel="noopener">Función Pública</a>.</li>
+  </ul>
+  <p class="note">Esto no es asesoría jurídica; confirma tu caso con un abogado.</p>
+
+  <h2>Cómo trabajo un asistente</h2>
+  <p>Primero miramos tus conversaciones reales y definimos qué preguntas atiende. Luego lo conecto a la API oficial de Meta con n8n, separo los datos de cada negocio con reglas a nivel de fila, verifico la firma de cada mensaje y dejo siempre una salida a una persona. El sistema ya funciona de punta a punta; todavía no tiene clientes de pago, así que te hago una demo en vivo antes de que decidas. Más sobre cómo cuido tu proyecto en <a href="/como-trabajo/">Cómo trabajo</a>.</p>
+
+  <h2>Preguntas frecuentes</h2>
+  <div class="faq">
+    {faqs.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+  </div>
+
+  <h2>Fuentes</h2>
+  <ul class="sources">
+    <li>Meta for Developers, «New pricing policy for AI Providers leveraging the WhatsApp Business Platform».</li>
+    <li>TechCrunch, «WhatsApp changes its terms to bar general-purpose chatbots from its platform», 18 de octubre de 2025.</li>
+    <li>Workitd, «WhatsApp Marketing Colombia 2026»; Chately, «CRM WhatsApp Colombia 2026»; GROWLAT, página de Ibagué; Mintec, «The Real Numbers Behind Selling AI Automation to Small Businesses».</li>
+    <li>Función Pública, Gestor Normativo: Ley 1581 de 2012 y Ley 2300 de 2023.</li>
+  </ul>
+</Doc>
