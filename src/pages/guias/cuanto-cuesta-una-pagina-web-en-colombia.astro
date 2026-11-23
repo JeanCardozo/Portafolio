@@ -7,7 +7,7 @@ const base = Astro.site!.href.replace(/\/$/, '');
 const path = '/guias/cuanto-cuesta-una-pagina-web-en-colombia/';
 const cop = offer.cop.toLocaleString('es-CO');
 const title = '¿Cuánto cuesta una página web en Colombia en 2026? Precios por fuente';
-const description = 'Precios de páginas web en Colombia en 2026 según cinco fuentes públicas: landing desde 500.000 COP, corporativa de 1 a 6 millones y tienda de 1,8 a 12 millones. Plazos y cómo comparar.';
+const description = 'Precios de páginas web en Colombia en 2026 según cinco fuentes públicas: landing desde 500.000 COP, corporativa de 1 a 6 millones, tienda de 1,8 a 12.';
 const faqs = [
   { q: '¿Cuánto cuesta una página web en Colombia en 2026?', a: 'Según las cinco fuentes públicas que revisé, una landing o web básica cuesta entre 500.000 y 2.500.000 pesos, una web corporativa entre 1.000.000 y 6.000.000 y una tienda en línea entre 1.800.000 y 12.000.000. Los precios publicados por agencias de Ibagué parten de 400.000 a 650.000 pesos para una landing.' },
   { q: '¿Por qué hay cotizaciones de 500.000 y de 5.000.000 pesos?', a: 'Porque no incluyen lo mismo. El precio cambia con lo que la web tiene que hacer (recibir mensajes, presentar la empresa o cobrar), el número de páginas propias, el diseño a medida frente a una plantilla, el SEO técnico, las integraciones y quién pone el dominio y el hosting. Compara alcance, no solo el número.' },
@@ -20,7 +20,7 @@ const schema = [
   breadcrumbSchema(base, [{ name: 'Guías', path: '/guias/' }, { name: 'Cuánto cuesta una página web', path }]),
 ];
 ---
-<Doc title={`${title} · Jean Cardozo`} description={description} h1="¿Cuánto cuesta una página web en Colombia en 2026?" crumb="Guías" updated="2026-11-23" schema={schema} cta="Hola Jean, leí tu guía de precios de páginas web y quiero cotizar.">
+<Doc title="Cuánto cuesta una página web en Colombia (2026) · JeanCRG" description={description} h1="¿Cuánto cuesta una página web en Colombia en 2026?" crumb="Guías" updated="2026-11-23" schema={schema} cta="Hola Jean, leí tu guía de precios de páginas web y quiero cotizar.">
   <div class="answer">
     <p><strong>Respuesta corta:</strong> en 2026, una landing o web básica cuesta entre <strong>500.000 y 2.500.000 pesos</strong>, una web corporativa entre <strong>1.000.000 y 6.000.000</strong> y una tienda en línea entre <strong>1.800.000 y 12.000.000</strong>. Son los extremos de cinco fuentes públicas consultadas entre el 30 de septiembre y el 23 de noviembre de 2026.</p>
   </div>
